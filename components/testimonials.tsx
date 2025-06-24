@@ -54,7 +54,7 @@ export default function MerchandiseSection() {
                   animation: "floatGlowSubtle 6s ease-in-out infinite",
                 }}
               >
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-center text-center">
                   <Image
                     className="rounded-lg"
                     src={item.img}
