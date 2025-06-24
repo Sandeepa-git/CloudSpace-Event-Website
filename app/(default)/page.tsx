@@ -1,7 +1,8 @@
 export const metadata = {
   title: "CLOUDSPACE V1.0",
-  description: "Page description",
+  description: "Explore CloudSpace — empowering the future with cutting-edge cloud technology, innovative features, and seamless workflows.",
 };
+
 
 import PageIllustration from "@/components/page-illustration";
 import Hero from "@/components/hero-home";
