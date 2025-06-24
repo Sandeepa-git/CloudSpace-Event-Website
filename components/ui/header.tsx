@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Logo from "./logo";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const pathname = usePathname();
 
-  // Hide Header only on `/signup` page (or `/auth/signup`)
+  // ✅ Hide Header only on `/signup` page (or `/auth/signup`)
   if (pathname === "/signup" || pathname === "/auth/signup") return null;
 
   const handleAnimatedScroll = (id: string) => {
@@ -34,16 +35,18 @@ export default function Header() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div
           className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-gray-900/90 px-3
-          before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit]
-          before:border before:border-transparent
-          before:[background:linear-gradient(to_right,#0f172a,#1e293b,#0f172a)_border-box]
-          before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]
-          after:absolute after:inset-0 after:-z-10 after:backdrop-blur-xs"
+            before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit]
+            before:border before:border-transparent
+            before:[background:linear-gradient(to_right,#0f172a,#1e293b,#0f172a)_border-box]
+            before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]
+            after:absolute after:inset-0 after:-z-10 after:backdrop-blur-xs"
         >
+          {/* Logo */}
           <div className="flex flex-1 items-center">
             <Logo />
           </div>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex flex-1 items-center justify-center space-x-6 text-base font-medium tracking-wide uppercase">
             {navItems.map((item) => (
               <button
@@ -56,6 +59,7 @@ export default function Header() {
             ))}
           </nav>
 
+          {/* Desktop Register Button */}
           <div className="hidden md:flex flex-1 items-center justify-end gap-3">
             <Link
               href="/signup"
@@ -65,39 +69,31 @@ export default function Header() {
             </Link>
           </div>
 
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden flex items-center justify-center p-2 rounded-md text-[#D1EAF5]/70 hover:text-[#00C3FF] focus:outline-none focus:ring-2 focus:ring-[#00C3FF]"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+            >
+              {mobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
+              ) : (
                 <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+              )}
+            </svg>
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <nav className="md:hidden mt-2 rounded-2xl bg-gray-900/90 p-4 backdrop-blur-sm border border-[rgba(0,195,255,0.1)]">
             <ul className="flex flex-col space-y-4 text-center text-[#D1EAF5]/70 font-medium text-base tracking-wide uppercase">
@@ -114,7 +110,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/signup"
-                  className="btn-sm bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-[5px] px-4 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.16)] hover:bg-[length:100%_150%] rounded transition-all duration-200 tracking-wide uppercase text-base text-center"
+                  className="btn-sm mx-auto bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-2 px-6 text-white rounded shadow transition hover:scale-105 tracking-wide uppercase text-base inline-block"
                 >
                   Register Now
                 </Link>

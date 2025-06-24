@@ -7,7 +7,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 const teamMembers = [
   {
     name: "Ravishka Prabath",
-    role: "Chairperson",
+    role: "Chairman",
     imgSrc: "/images/Ravishka.jpg",
     bio: "Ravishka oversees the entire event and leads the organizing committee.",
     social: {
@@ -18,7 +18,7 @@ const teamMembers = [
   },
   {
     name: "Akinda Gunarathna",
-    role: "Vice Chaiperson",
+    role: "Vice Chairman",
     imgSrc: "/images/Akinda.jpg",
     bio: "Akinda coordinates the sub-teams and handles operations planning.",
     social: {
@@ -39,36 +39,36 @@ const teamMembers = [
     },
   },
   {
-    name: "John Doe", 
-    role: "Program Team Lead",
-    imgSrc: "/images/john.jpg",
-    bio: "John oversees the program aspects and ensures a cohesive visual identity.",
+    name: "Tishan Rajapaksha",
+    role: "Treasurer",
+    imgSrc: "/images/Tishan.jpg",
+    bio: "Tishan oversees venue arrangements and logistics for the event.",
     social: {
-      linkedin: "https://linkedin.com/in/john-doe",
-      facebook: "https://facebook.com/john-doe",
-      instagram: "https://instagram.com/john-doe",
+      linkedin: "https://linkedin.com/in/tishan",
+      facebook: "https://facebook.com/tishan",
+      instagram: "https://instagram.com/tishan",
     },
   },
   {
-    name: "Tishan Rajapaksha",
-    role: "Program Team Lead",
-    imgSrc: "/images/Tishan.jpg",
-    bio: "Tishan oversees the program aspects and ensures a cohesive visual identity.",
+    name: "Anjali Silva",
+    role: "Program Lead",
+    imgSrc: "/images/Anjali.jpg",
+    bio: "Anjali manages promotions, social media, and outreach activities.",
     social: {
-      linkedin: "https://linkedin.com/in/tishan-rajapakshe",
-      facebook: "https://facebook.com/tishan-rajapakshe",
-      instagram: "https://instagram.com/tishan-rajapakshe",
+      linkedin: "https://linkedin.com/in/anjali",
+      facebook: "https://facebook.com/anjali",
+      instagram: "https://instagram.com/anjali",
     },
   },
   {
     name: "Sandeepa Wimalasiri",
-    role: "Program Team Lead",
+    role: "Technical Lead",
     imgSrc: "/images/Sandeepa.jpg",
-    bio: "Responsible for ensuring all technical operations align with a cohesive visual identity.",
+    bio: "Sandeepa handles technical setups, IT infrastructure, and support.",
     social: {
-      linkedin: "https://linkedin.com/in/sandeepa-wimalasiri",
-      facebook: "https://facebook.com/sandeepa-wimalasiri",
-      instagram: "https://instagram.com/sandeepa-wimalasiri",
+      linkedin: "https://linkedin.com/in/kasun",
+      facebook: "https://facebook.com/kasun",
+      instagram: "https://instagram.com/kasun",
     },
   },
 ];
@@ -162,7 +162,8 @@ export default function Cta() {
 
       <style jsx>{`
         @keyframes gradient {
-          0%, 100% {
+          0%,
+          100% {
             background-position: 0% 50%;
           }
           50% {

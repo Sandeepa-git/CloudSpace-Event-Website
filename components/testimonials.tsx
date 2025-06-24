@@ -8,18 +8,18 @@ import MerchandiseImg03 from "@/public/images/Bottle.jpg";
 const merchandise = [
   {
     img: MerchandiseImg01,
-    title: "EcoGrow T-shirt",
-    description: "Sustainable cotton shirt with green tech logo",
+    title: "CloudSpace Laptop Bag",
+    description: "Sleek and durable laptop bag designed for cloud professionals on the move.",
   },
   {
     img: MerchandiseImg02,
-    title: "AgroTech Cap",
-    description: "Stylish cap representing modern agriculture",
+    title: "CloudSpace Tech T-shirt",
+    description: "Comfortable cotton tee featuring the CloudSpace logo with a futuristic design.",
   },
   {
     img: MerchandiseImg03,
-    title: "Smart Farming Tote Bag",
-    description: "Reusable tote with printed circuit-style design",
+    title: "CloudSpace Hydration Bottle",
+    description: "Insulated water bottle with a modern cloud-inspired circuit design to keep you refreshed.",
   },
 ];
 
@@ -40,8 +40,7 @@ export default function MerchandiseSection() {
             </h2>
 
             <p className="text-lg text-[#00C3FF]/70">
-              Discover our exclusive merchandise designed for agri-tech
-              enthusiasts.
+              Get your official CloudSpace gear and show off your passion for cloud tech.
             </p>
           </div>
 
@@ -50,25 +49,23 @@ export default function MerchandiseSection() {
             {merchandise.map((item, index) => (
               <article
                 key={index}
-                className="group relative rounded-2xl bg-gray-900/50 p-4 sm:p-5 backdrop-blur-xs transition hover:shadow-2xl"
+                className="group relative rounded-2xl bg-gray-900/50 p-5 backdrop-blur-xs transition hover:shadow-2xl"
                 style={{
                   animation: "floatGlowSubtle 6s ease-in-out infinite",
                 }}
               >
-                <div className="flex flex-col gap-3 items-center text-center">
+                <div className="flex flex-col gap-4">
                   <Image
-                    className="rounded-lg w-full max-w-[180px] sm:max-w-[280px] mx-auto"
+                    className="rounded-lg"
                     src={item.img}
                     alt={item.title}
                     width={400}
                     height={300}
                   />
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-100">
+                  <h3 className="text-lg font-semibold text-gray-100">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#00C3FF]/70">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-[#00C3FF]/70">{item.description}</p>
                 </div>
               </article>
             ))}
