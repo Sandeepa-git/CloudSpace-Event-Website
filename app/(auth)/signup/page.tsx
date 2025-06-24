@@ -2,6 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+
+// Initialize Supabase client
+const supabase = createClient(
+  "https://dbcszijifmlkqyafomnu.supabase.co", // replace with your project URL
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiY3N6aWppZm1sa3F5YWZvbW51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NjQ3NTYsImV4cCI6MjA2NjM0MDc1Nn0.FfPOF322XTm9O3A4oXqcq5br3yc7IKuLFYcANQWvw-o"                 // replace with your anon key
+);
 
 type FormData = {
   firstName: string;
@@ -15,8 +22,6 @@ type FormData = {
 type Errors = {
   [K in keyof FormData]: string;
 };
-
-const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwLdilZBh_rlk62QFg9xE28vEDvIXuvJ79akW7A2QcbHFEC5-jQaoaLbn2wtHHxAWhwlw/exec";
 
 export default function SignUp() {
   const [formData, setFormData] = useState<FormData>({
@@ -39,7 +44,6 @@ export default function SignUp() {
 
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  // Simple regex validations
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^\+?\d{7,15}$/;
 
@@ -92,7 +96,6 @@ export default function SignUp() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-
     setErrors((prev) => ({ ...prev, [name]: "" }));
     setSuccessMessage("");
   };
@@ -103,15 +106,20 @@ export default function SignUp() {
     if (!validate()) return;
 
     try {
-      const res = await fetch(GOOGLE_SHEET_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const { error } = await supabase.from("Cloudspace Registration").insert([
+        {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          university: formData.university,
+          year: formData.year,
+          whatsapp: formData.whatsapp,
+        },
+      ]);
 
-      const json = await res.json();
-
-      if (json.status === "success") {
+      if (error) {
+        alert("Failed to save data: " + error.message);
+      } else {
         setSuccessMessage("Registration successful! You can now go back to home.");
         setFormData({
           firstName: "",
@@ -129,8 +137,6 @@ export default function SignUp() {
           year: "",
           whatsapp: "",
         });
-      } else {
-        alert("Failed to save data: " + (json.message || "Unknown error"));
       }
     } catch (error: any) {
       alert("An error occurred: " + error.message);
@@ -156,21 +162,18 @@ export default function SignUp() {
     <section className="bg-[#000000] text-white min-h-screen flex items-center justify-center">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-12 md:py-20">
-          {/* Section header */}
           <div className="pb-12 text-center">
             <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text text-transparent font-nacelle text-3xl font-semibold md:text-4xl">
               Create an account
             </h1>
           </div>
 
-          {/* Success message */}
           {successMessage && (
             <div className="mb-6 rounded bg-green-700 p-4 text-center text-white">
               {successMessage}
             </div>
           )}
 
-          {/* Sign Up form */}
           <form onSubmit={handleSubmit} className="mx-auto max-w-[400px]" noValidate>
             <div className="space-y-5">
               {fields.map(({ label, id, type, autoComplete, placeholder }) => (

@@ -101,25 +101,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Message Section */}
-          <div className="mx-auto md:mx-0 max-w-md">
-            <h3 className="text-sm font-semibold uppercase tracking-widest bg-gradient-to-r from-[#00C3FF] to-[#0068FF] bg-clip-text text-transparent mb-6">Get in Touch</h3>
-            <textarea
-              rows={2}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write your message here..."
-              className="mb-4 w-full rounded-md border border-[#00C3FF66] bg-gray-900 text-[#D1EAF5] p-3 placeholder-[#00C3FF99] focus:outline-none focus:ring-2 focus:ring-[#00C3FF] focus:border-transparent transition"
-            />
-            <button
-              type="button"
-              onClick={handleSendMessage}
-              disabled={isSending}
-              className="rounded-md bg-gradient-to-r from-[#00C3FF] to-[#0068FF] px-8 py-3 text-white font-semibold uppercase tracking-wide shadow-lg hover:brightness-110 transition w-full disabled:opacity-50"
-            >
-              {isSending ? "Sending..." : "Send Message"}
-            </button>
-          </div>
+          
 
           {/* Social Links */}
           <div className="mx-auto md:mx-0 max-w-xs md:max-w-none">

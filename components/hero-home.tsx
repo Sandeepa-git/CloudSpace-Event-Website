@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 export default function HeroHome() {
-  // null means "not mounted yet"
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
     hours: number;
@@ -36,11 +35,10 @@ export default function HeroHome() {
     return () => clearInterval(interval);
   }, []);
 
-  // Render static zeros if not yet mounted to avoid hydration mismatch
   const displayTime = timeLeft ?? { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
   return (
-    <section id="hero" className="relative pt-20 sm:pt-28 overflow-hidden">
+    <section id="hero" className="relative pt-16 sm:pt-24 overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -60,17 +58,15 @@ export default function HeroHome() {
       {/* Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
         <div className="py-10 sm:py-12 md:py-20">
-          <div className="pb-8 sm:pb-12 text-center md:pb-20">
-            {/* Main Heading */}
-            <h1
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-5 text-3xl sm:text-4xl md:text-5xl font-semibold"
-            >
+          <div className="pb-10 sm:pb-14 text-center">
+            {/* Heading */}
+            <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-semibold pb-4">
               BUILD THE FUTURE WITH CLOUD
             </h1>
 
-            {/* Countdown Timer */}
+            {/* Countdown Timer - Single Line */}
             <div
-              className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-6 max-w-full px-2 sm:px-0"
+              className="mt-6 sm:mt-10 flex flex-nowrap justify-center overflow-x-auto gap-2 sm:gap-4 px-2 no-scrollbar"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -82,34 +78,34 @@ export default function HeroHome() {
               ].map((unit) => (
                 <div
                   key={unit.label}
-                  className="flex-shrink flex-grow min-w-[60px] max-w-[25%] sm:min-w-[120px] flex flex-col items-center justify-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-2 py-3 sm:px-4 sm:py-6 rounded-lg sm:rounded-xl shadow-md"
+                  className="flex-shrink-0 w-[72px] xs:w-[80px] sm:w-[100px] flex flex-col items-center justify-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-2 py-3 sm:px-4 sm:py-6 rounded-lg shadow-md"
                 >
                   <span
-                    className="text-2xl sm:text-5xl md:text-6xl font-extrabold text-[#E0F7FF]"
+                    className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-extrabold text-[#E0F7FF]"
                     style={{
-                      textShadow: "0 0 6px #00C3FF, 0 0 10px #0068FF",
+                      textShadow: "0 0 3px #00C3FF, 0 0 5px #0068FF",
                     }}
                   >
                     {unit.value.toString().padStart(2, "0")}
                   </span>
-                  <span className="mt-1 sm:mt-2 text-xs sm:text-base text-[#AEE8FF] uppercase tracking-wider sm:tracking-widest">
+                  <span className="mt-1 text-[10px] xs:text-xs sm:text-sm text-[#AEE8FF] uppercase tracking-wider">
                     {unit.label}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Optional Subtitle */}
-            <div className="mx-auto max-w-3xl">
+            {/* Subtitle or Description */}
+            <div className="mx-auto max-w-3xl px-4 sm:px-0">
               <p
-                className="mt-8 text-base sm:text-xl text-indigo-200/65"
+                className="mt-8 text-sm xs:text-base sm:text-lg text-indigo-200/70"
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                {/* Add your subtitle or description here */}
+                {/* Optional subtitle or info goes here */}
               </p>
-              <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
-                {/* Add buttons or modal here if needed */}
+              <div className="mt-6 flex justify-center">
+                {/* CTA or modal buttons */}
               </div>
             </div>
           </div>

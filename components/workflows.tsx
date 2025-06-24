@@ -1,7 +1,7 @@
 import Image from "next/image";
-import WorflowImg01 from "@/public/images/awscert2.png";
-import WorflowImg02 from "@/public/images/awscert1.png";
-import WorflowImg03 from "@/public/images/awscert3.png";
+import WorflowImg01 from "@/public/images/badgebasic.png";
+import WorflowImg02 from "@/public/images/badgeintermediate.png";
+import WorflowImg03 from "@/public/images/badgeadvance.png";
 import Spotlight from "@/components/spotlight";
 
 export default function Workflows() {
