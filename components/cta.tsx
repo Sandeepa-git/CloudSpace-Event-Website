@@ -7,7 +7,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 const teamMembers = [
   {
     name: "Ravishka Prabath",
-    role: "Chairman",
+    role: "Chairperson",
     imgSrc: "/images/Ravishka.jpg",
     bio: "Ravishka oversees the entire event and leads the organizing committee.",
     social: {
@@ -18,7 +18,7 @@ const teamMembers = [
   },
   {
     name: "Akinda Gunarathna",
-    role: "Vice Chairman",
+    role: "Vice Chaiperson",
     imgSrc: "/images/Akinda.jpg",
     bio: "Akinda coordinates the sub-teams and handles operations planning.",
     social: {
@@ -36,6 +36,39 @@ const teamMembers = [
       linkedin: "https://linkedin.com/in/dureksha",
       facebook: "https://facebook.com/dureksha",
       instagram: "https://instagram.com/dureksha",
+    },
+  },
+  {
+    name: "John Doe", 
+    role: "Program Team Lead",
+    imgSrc: "/images/john.jpg",
+    bio: "John oversees the program aspects and ensures a cohesive visual identity.",
+    social: {
+      linkedin: "https://linkedin.com/in/john-doe",
+      facebook: "https://facebook.com/john-doe",
+      instagram: "https://instagram.com/john-doe",
+    },
+  },
+  {
+    name: "Tishan Rajapaksha",
+    role: "Program Team Lead",
+    imgSrc: "/images/Tishan.jpg",
+    bio: "Tishan oversees the program aspects and ensures a cohesive visual identity.",
+    social: {
+      linkedin: "https://linkedin.com/in/tishan-rajapakshe",
+      facebook: "https://facebook.com/tishan-rajapakshe",
+      instagram: "https://instagram.com/tishan-rajapakshe",
+    },
+  },
+  {
+    name: "Sandeepa Wimalasiri",
+    role: "Program Team Lead",
+    imgSrc: "/images/Sandeepa.jpg",
+    bio: "Responsible for ensuring all technical operations align with a cohesive visual identity.",
+    social: {
+      linkedin: "https://linkedin.com/in/sandeepa-wimalasiri",
+      facebook: "https://facebook.com/sandeepa-wimalasiri",
+      instagram: "https://instagram.com/sandeepa-wimalasiri",
     },
   },
 ];
