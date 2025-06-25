@@ -137,7 +137,7 @@ export default function GeminiChatbot() {
           className="chat-button"
           aria-label="Open chat"
         >
-          💬
+          🤖
         </button>
       )}
 
@@ -153,6 +153,15 @@ export default function GeminiChatbot() {
               ✕
             </button>
           </header>
+
+          <div className="faq-section">
+            <h4>📘 Quick Questions</h4>
+            <details><summary>What is CloudSpace v1.0?</summary><p>It's a multi-phase AWS-focused cloud event hosted at SLTC.</p></details>
+            <details><summary>Who can attend?</summary><p>All Sri Lankan undergraduates from state and non-state universities.</p></details>
+            <details><summary>When does it happen?</summary><p>On July 12, 19, and 26, 2025.</p></details>
+            <details><summary>What tools will we use?</summary><p>AWS, Docker, Kubernetes, GitHub, CI/CD, IAM, Lambda, EC2, and more.</p></details>
+            <details><summary>Where is it hosted?</summary><p>SLTC Trace Campus (Main Conference Hall).</p></details>
+          </div>
 
           <div ref={containerRef} className="chat-messages">
             {messages.map((msg, i) => (
@@ -214,17 +223,12 @@ export default function GeminiChatbot() {
           z-index: 1000;
         }
 
-        .chat-button:hover {
-          transform: scale(1.1);
-          box-shadow: 0 0 20px rgba(10, 116, 218, 0.8);
-        }
-
         .chat-window {
           position: fixed;
           bottom: 90px;
           right: 24px;
-          width: 320px;
-          max-height: 480px;
+          width: 340px;
+          max-height: 520px;
           background: #fff;
           border-radius: 8px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -247,12 +251,32 @@ export default function GeminiChatbot() {
           border-top-right-radius: 8px;
         }
 
-        .close-button {
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 20px;
+        .faq-section {
+          padding: 8px 12px;
+          background: #eef7ff;
+          border-bottom: 1px solid #cce5ff;
+          max-height: 160px;
+          overflow-y: auto;
+        }
+
+        .faq-section h4 {
+          margin: 4px 0 6px;
+          color: #0a74da;
+        }
+
+        .faq-section details {
+          margin-bottom: 4px;
+        }
+
+        .faq-section summary {
           cursor: pointer;
+          font-weight: bold;
+          color: #0a74da;
+        }
+
+        .faq-section p {
+          margin-left: 12px;
+          color: #333;
         }
 
         .chat-messages {
@@ -308,7 +332,7 @@ export default function GeminiChatbot() {
           border-radius: 6px;
           border: 1px solid #ccc;
           font-size: 14px;
-          min-width: 0; /* fix shrinking issue */
+          min-width: 0;
         }
 
         .chat-input-area button {
@@ -322,7 +346,6 @@ export default function GeminiChatbot() {
           font-size: 14px;
           border: none;
           color: white;
-          user-select: none;
         }
 
         .chat-input-area .send-button {
@@ -341,7 +364,6 @@ export default function GeminiChatbot() {
         .chat-input-area .clear-button {
           background: #e55353;
           padding: 8px 10px;
-          min-width: 54px;
         }
 
         .chat-input-area .clear-button:hover {
@@ -360,36 +382,18 @@ export default function GeminiChatbot() {
         }
 
         @media (max-width: 480px) {
-          .chat-button {
-            right: 16px;
-            bottom: 16px;
-            width: 54px;
-            height: 54px;
-            font-size: 24px;
-          }
-
           .chat-window {
             width: 95vw;
             right: 2.5vw;
-            bottom: 80px;
-            max-height: 85vh;
+            max-height: 90vh;
             font-size: 13px;
           }
-
           .chat-header h2 {
             font-size: 15px;
           }
-
-          .chat-input-area input,
-          .chat-input-area button {
-            font-size: 12px;
-            padding: 7px 8px;
-            min-width: auto;
-          }
-
-          .chat-input-area .clear-button {
-            min-width: auto;
-            padding: 7px 10px;
+          .faq-section {
+            font-size: 13px;
+            max-height: 120px;
           }
         }
       `}</style>

@@ -79,7 +79,7 @@ export default function HeroHome() {
             <h1
               className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-5 text-3xl sm:text-4xl md:text-5xl font-semibold"
             >
-              BUILD THE FUTURE WITH CLOUD
+              Trailblazing Toward Cloud Excellence
             </h1>
 
             {/* Countdown */}

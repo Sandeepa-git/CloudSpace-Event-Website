@@ -2,73 +2,68 @@
 
 import Image from "next/image";
 import BlurredShape from "@/public/images/blurred-shape.svg";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaEnvelope, FaPhone } from "react-icons/fa";
 
 const teamMembers = [
   {
-    name: "Ravishka Prabath",
-    role: "Chairman",
+    name: "Ravishka Rathnayake",
+    role: "Chairperson",
     imgSrc: "/images/Ravishka.jpg",
-    bio: "Ravishka oversees the entire event and leads the organizing committee.",
+    email: "ravishkaprabhath1025@gmail.com",
+    contact: "0713581934",
     social: {
-      linkedin: "https://linkedin.com/in/ravishka",
-      facebook: "https://facebook.com/ravishka",
-      instagram: "https://instagram.com/ravishka",
+      linkedin: "https://www.linkedin.com/in/ravishkaprabhath",
     },
   },
   {
-    name: "Akinda Gunarathna",
-    role: "Vice Chairman",
+    name: "Akinda Gunarathne",
+    role: "Vice-chairperson",
     imgSrc: "/images/Akinda.jpg",
-    bio: "Akinda coordinates the sub-teams and handles operations planning.",
+    email: "akindagunarathne@gmail.com",
+    contact: "+94 74 073 3951",
     social: {
-      linkedin: "https://linkedin.com/in/akinda",
-      facebook: "https://facebook.com/akinda",
-      instagram: "https://instagram.com/akinda",
+      linkedin: "https://www.linkedin.com/in/akinda-gunarathne-5405191b2/",
     },
   },
   {
     name: "Dureksha Arangala",
     role: "Secretary",
     imgSrc: "/images/Dureksha.jpg",
-    bio: "Dureksha manages documentation, scheduling, and internal communication.",
+    email: "durekshachammi2911@gmail.com",
+    contact: "076 9395758",
     social: {
-      linkedin: "https://linkedin.com/in/dureksha",
-      facebook: "https://facebook.com/dureksha",
-      instagram: "https://instagram.com/dureksha",
+      linkedin: "https://www.linkedin.com/in/dureksha-arangala-03668019a",
     },
   },
   {
-    name: "Tishan Rajapaksha",
+    name: "Nadil Kularathne",
+    role: "Program Team Lead",
+    imgSrc: "/images/Nadil.jpg",
+    email: "Nadilx007@gmail.com",
+    contact: "076 724 0074",
+    social: {
+      linkedin:
+        "https://www.linkedin.com/in/nadil-kularathne-a31497307?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    },
+  },
+  {
+    name: "Tishan Arunalu",
     role: "Treasurer",
     imgSrc: "/images/Tishan.jpg",
-    bio: "Tishan oversees venue arrangements and logistics for the event.",
+    email: "tishanarunalu435@gmail.com",
+    contact: "+94 70 440 4093",
     social: {
-      linkedin: "https://linkedin.com/in/tishan",
-      facebook: "https://facebook.com/tishan",
-      instagram: "https://instagram.com/tishan",
-    },
-  },
-  {
-    name: "Anjali Silva",
-    role: "Program Lead",
-    imgSrc: "/images/Anjali.jpg",
-    bio: "Anjali manages promotions, social media, and outreach activities.",
-    social: {
-      linkedin: "https://linkedin.com/in/anjali",
-      facebook: "https://facebook.com/anjali",
-      instagram: "https://instagram.com/anjali",
+      linkedin: "https://www.linkedin.com/in/tishan-arunalu-53b020316/",
     },
   },
   {
     name: "Sandeepa Wimalasiri",
-    role: "Technical Lead",
+    role: "Technical Team Lead",
     imgSrc: "/images/Sandeepa.jpg",
-    bio: "Sandeepa handles technical setups, IT infrastructure, and support.",
+    email: "agsvwimalasiri@gmail.com",
+    contact: "0750997715",
     social: {
-      linkedin: "https://linkedin.com/in/kasun",
-      facebook: "https://facebook.com/kasun",
-      instagram: "https://instagram.com/kasun",
+      linkedin: "https://www.linkedin.com/in/sandeepa-vimukthi-wimalasiri-92ab0a277/",
     },
   },
 ];
@@ -76,6 +71,7 @@ const teamMembers = [
 export default function Cta() {
   return (
     <section id="cta" className="relative overflow-hidden pb-20">
+      {/* Background Blurred Shape */}
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -mb-24 ml-20 -translate-x-1/2"
         aria-hidden="true"
@@ -88,22 +84,26 @@ export default function Cta() {
           alt="Blurred shape"
         />
       </div>
+
+      {/* Main Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-12 md:py-20 rounded-lg">
           <div className="mx-auto max-w-3xl text-center">
             <h2
-              className="animate-gradient bg-gradient-to-r from-[#00C3FF] to-[#0068FF] bg-[length:200%_auto] bg-clip-text text-transparent pb-8 font-nacelle text-3xl font-semibold md:text-4xl"
+              className="animate-gradient bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text text-transparent pb-8 font-nacelle text-3xl font-semibold md:text-4xl"
               data-aos="fade-up"
             >
               Meet Our Organizing Team
             </h2>
 
-            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
-              {teamMembers.map(({ name, role, imgSrc, bio, social }) => (
+            {/* Team Cards */}
+            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3" role="list">
+              {teamMembers.map(({ name, role, imgSrc, social, email, contact }) => (
                 <article
                   key={name}
                   className="rounded-xl bg-gray-900 p-6 text-center shadow-lg transition hover:scale-[1.03]"
                   data-aos="fade-up"
+                  role="listitem"
                 >
                   <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-2 border-[#00C3FF]">
                     <Image
@@ -114,11 +114,13 @@ export default function Cta() {
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-white">{name}</h3>
-                  <p className="mb-2 text-indigo-300">{role}</p>
-                  <p className="text-sm text-gray-400">{bio}</p>
+                  <h3 className="text-lg font-semibold text-white whitespace-nowrap">
+                    {name}
+                  </h3>
+                  <p className="mb-2 text-blue-300">{role}</p>
 
-                  <div className="mt-4 flex justify-center gap-4 text-[#00C3FF]">
+                  {/* Contact Icons */}
+                  <div className="mt-4 flex justify-center gap-6 text-[#00C3FF]">
                     {social.linkedin && (
                       <a
                         href={social.linkedin}
@@ -130,26 +132,22 @@ export default function Cta() {
                         <FaLinkedinIn size={20} />
                       </a>
                     )}
-                    {social.facebook && (
+                    {email && (
                       <a
-                        href={social.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Facebook"
+                        href={`mailto:${email}`}
+                        aria-label="Email"
                         className="hover:text-[#0068FF] transition"
                       >
-                        <FaFacebookF size={20} />
+                        <FaEnvelope size={20} />
                       </a>
                     )}
-                    {social.instagram && (
+                    {contact && (
                       <a
-                        href={social.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Instagram"
+                        href={`tel:${contact.replace(/\s+/g, "")}`}
+                        aria-label="Phone"
                         className="hover:text-[#0068FF] transition"
                       >
-                        <FaInstagram size={20} />
+                        <FaPhone size={20} />
                       </a>
                     )}
                   </div>
@@ -160,6 +158,7 @@ export default function Cta() {
         </div>
       </div>
 
+      {/* Animated Gradient Style */}
       <style jsx>{`
         @keyframes gradient {
           0%,
