@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 
 import Header from "@/components/ui/header";
 
+
 // Google font
 const inter = Inter({
   subsets: ["latin"],
