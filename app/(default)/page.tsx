@@ -11,14 +11,17 @@ import Features from "@/components/features";
 import Testimonials from "@/components/testimonials";
 import Cta from "@/components/cta";
 import Chatbot from "@/components/Chatbot";
-
+import RegisterNow from "@/components/RegisterNow";
+import Preloader from "@/components/Preloader";
 
 export default function Home() {
   return (
     <>
+      <Preloader />
       <PageIllustration />
       <Hero />
       <Features />
+      <RegisterNow />
       <Workflows />
       <Testimonials />
       <Cta />

@@ -26,7 +26,7 @@ const merchandise = [
 export default function MerchandiseSection() {
   return (
     <section>
-      <div id="testimonials" className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div id="testimonials" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
         <div className="border-t py-12 md:py-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center">
@@ -61,6 +61,7 @@ export default function MerchandiseSection() {
                     alt={item.title}
                     width={400}
                     height={300}
+                    priority
                   />
                   <h3 className="text-lg font-semibold text-gray-100">
                     {item.title}

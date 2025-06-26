@@ -9,7 +9,7 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-12"
     >
       {/* Background Shapes */}
       <div
@@ -51,7 +51,7 @@ export default function Features() {
         </div>
 
         {/* Content Grid */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 px-2 md:px-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-20 px-2 md:px-4">
           {/* Image */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-start">
             <Image

@@ -18,14 +18,10 @@ export default function HeroHome() {
   });
 
   useEffect(() => {
-    // Calculate 20th of next month dynamically
     function getNextMonth20th() {
       const now = new Date();
-      // If month is December (11), increment year
       const year = now.getMonth() === 11 ? now.getFullYear() + 1 : now.getFullYear();
-      // Next month (0-based)
       const month = (now.getMonth() + 1) % 12;
-      // 20th day of next month, at 00:00:00
       return new Date(year, month, 20, 0, 0, 0).getTime();
     }
 
@@ -54,8 +50,7 @@ export default function HeroHome() {
   }, []);
 
   return (
-    // ...rest of your component JSX (unchanged)
-    <section id="hero" className="relative pt-20 sm:pt-28 overflow-hidden">
+    <section id="hero" className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -73,51 +68,77 @@ export default function HeroHome() {
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
       {/* Content */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
-        <div className="py-10 sm:py-12 md:py-20">
-          <div className="pb-8 sm:pb-12 text-center md:pb-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="py-8 sm:py-12 md:py-20">
+          <div className="pb-6 sm:pb-10 md:pb-16 text-center max-w-4xl mx-auto">
             <h1
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-5 text-3xl sm:text-4xl md:text-5xl font-semibold"
+              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-4 text-3xl sm:text-4xl md:text-5xl font-semibold"
             >
               Trailblazing Toward Cloud Excellence
             </h1>
 
-            {/* Countdown */}
+            {/* Countdown Timer */}
             <div
-              className="mt-8 sm:mt-10 flex gap-2 sm:gap-4 max-w-full px-1 sm:px-0 overflow-x-auto no-scrollbar whitespace-nowrap justify-center"
+              className="mt-6 sm:mt-8 flex gap-2 sm:gap-4 max-w-full px-1 sm:px-0 overflow-x-auto no-scrollbar whitespace-nowrap justify-center"
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              {[
-                { label: "Days", value: timeLeft.days },
-                { label: "Hours", value: timeLeft.hours },
-                { label: "Minutes", value: timeLeft.minutes },
-                { label: "Seconds", value: timeLeft.seconds },
-              ].map(({ label, value }) => (
-                <div
-                  key={label}
-                  className="flex-shrink-0 min-w-[68px] sm:min-w-[90px] flex flex-col items-center justify-center text-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-2 py-2 sm:px-4 sm:py-4 rounded-md shadow-md"
+              {/* Timer Cards */}
+              <div className="flex-shrink-0 min-w-[70px] sm:min-w-[90px] flex flex-col items-center justify-center text-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-3 py-2 sm:px-4 sm:py-4 rounded-md shadow-md">
+                <span
+                  className="text-lg sm:text-2xl font-bold text-[#E0F7FF]"
+                  style={{ textShadow: "0 0 4px #00C3FF, 0 0 8px #0068FF" }}
                 >
-                  <span
-                    className="text-lg sm:text-2xl font-bold text-[#E0F7FF]"
-                    style={{ textShadow: "0 0 4px #00C3FF, 0 0 8px #0068FF" }}
-                  >
-                    {value.toString().padStart(2, "0")}
-                  </span>
-                  <span className="mt-1 text-[10px] sm:text-xs text-[#AEE8FF] uppercase tracking-wide">
-                    {label}
-                  </span>
-                </div>
-              ))}
+                  {timeLeft.days.toString().padStart(2, "0")}
+                </span>
+                <span className="mt-1 text-[10px] sm:text-xs text-[#AEE8FF] uppercase tracking-wide">
+                  Days
+                </span>
+              </div>
+              <div className="flex-shrink-0 min-w-[70px] sm:min-w-[90px] flex flex-col items-center justify-center text-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-3 py-2 sm:px-4 sm:py-4 rounded-md shadow-md">
+                <span
+                  className="text-lg sm:text-2xl font-bold text-[#E0F7FF]"
+                  style={{ textShadow: "0 0 4px #00C3FF, 0 0 8px #0068FF" }}
+                >
+                  {timeLeft.hours.toString().padStart(2, "0")}
+                </span>
+                <span className="mt-1 text-[10px] sm:text-xs text-[#AEE8FF] uppercase tracking-wide">
+                  Hours
+                </span>
+              </div>
+              <div className="flex-shrink-0 min-w-[70px] sm:min-w-[90px] flex flex-col items-center justify-center text-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-3 py-2 sm:px-4 sm:py-4 rounded-md shadow-md">
+                <span
+                  className="text-lg sm:text-2xl font-bold text-[#E0F7FF]"
+                  style={{ textShadow: "0 0 4px #00C3FF, 0 0 8px #0068FF" }}
+                >
+                  {timeLeft.minutes.toString().padStart(2, "0")}
+                </span>
+                <span className="mt-1 text-[10px] sm:text-xs text-[#AEE8FF] uppercase tracking-wide">
+                  Minutes
+                </span>
+              </div>
+              <div className="flex-shrink-0 min-w-[70px] sm:min-w-[90px] flex flex-col items-center justify-center text-center bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm px-3 py-2 sm:px-4 sm:py-4 rounded-md shadow-md">
+                <span
+                  className="text-lg sm:text-2xl font-bold text-[#E0F7FF]"
+                  style={{ textShadow: "0 0 4px #00C3FF, 0 0 8px #0068FF" }}
+                >
+                  {timeLeft.seconds.toString().padStart(2, "0")}
+                </span>
+                <span className="mt-1 text-[10px] sm:text-xs text-[#AEE8FF] uppercase tracking-wide">
+                  Seconds
+                </span>
+              </div>
             </div>
 
-            {/* Subtitle / CTA area */}
-            <div className="mx-auto max-w-3xl">
+            {/* Subtitle or CTA */}
+            <div className="mx-auto max-w-3xl mt-8">
               <p
-                className="mt-8 text-sm sm:text-lg text-indigo-200/65"
+                className="text-sm sm:text-lg text-indigo-200/65"
                 data-aos="fade-up"
                 data-aos-delay={200}
-              ></p>
+              >
+                {/* Optional subtitle content here */}
+              </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"></div>
             </div>
           </div>

@@ -82,26 +82,30 @@ export default function Cta() {
           width={760}
           height={668}
           alt="Blurred shape"
+          priority
         />
       </div>
 
       {/* Main Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-12 md:py-20 rounded-lg">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-10 sm:py-12 md:py-20 rounded-lg">
           <div className="mx-auto max-w-3xl text-center">
             <h2
-              className="animate-gradient bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text text-transparent pb-8 font-nacelle text-3xl font-semibold md:text-4xl"
+              className="animate-gradient bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text text-transparent pb-8 font-nacelle text-3xl sm:text-4xl font-semibold"
               data-aos="fade-up"
             >
               Meet Our Organizing Team
             </h2>
 
             {/* Team Cards */}
-            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3" role="list">
+            <div
+              className="grid gap-8 sm:grid-cols-2 md:grid-cols-3"
+              role="list"
+            >
               {teamMembers.map(({ name, role, imgSrc, social, email, contact }) => (
                 <article
                   key={name}
-                  className="rounded-xl bg-gray-900 p-6 text-center shadow-lg transition hover:scale-[1.03]"
+                  className="rounded-xl bg-gray-900 p-6 text-center shadow-lg transition-transform hover:scale-[1.03]"
                   data-aos="fade-up"
                   role="listitem"
                 >
@@ -112,11 +116,10 @@ export default function Cta() {
                       width={112}
                       height={112}
                       className="object-cover"
+                      priority
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-white whitespace-nowrap">
-                    {name}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-white truncate">{name}</h3>
                   <p className="mb-2 text-blue-300">{role}</p>
 
                   {/* Contact Icons */}
@@ -127,7 +130,7 @@ export default function Cta() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="LinkedIn"
-                        className="hover:text-[#0068FF] transition"
+                        className="hover:text-[#0068FF] transition-colors"
                       >
                         <FaLinkedinIn size={20} />
                       </a>
@@ -136,7 +139,7 @@ export default function Cta() {
                       <a
                         href={`mailto:${email}`}
                         aria-label="Email"
-                        className="hover:text-[#0068FF] transition"
+                        className="hover:text-[#0068FF] transition-colors"
                       >
                         <FaEnvelope size={20} />
                       </a>
@@ -145,7 +148,7 @@ export default function Cta() {
                       <a
                         href={`tel:${contact.replace(/\s+/g, "")}`}
                         aria-label="Phone"
-                        className="hover:text-[#0068FF] transition"
+                        className="hover:text-[#0068FF] transition-colors"
                       >
                         <FaPhone size={20} />
                       </a>
