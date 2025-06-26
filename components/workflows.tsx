@@ -7,7 +7,7 @@ import Spotlight from "@/components/spotlight";
 export default function Workflows() {
   return (
     <section id="workflows" className="py-8 sm:py-12 md:py-20">
-      <div className="mx-auto max-w-6xl px-2 sm:px-4 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <div className="pb-8 sm:pb-12 md:pb-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-8 sm:pb-12 text-center md:pb-20">
@@ -40,15 +40,16 @@ export default function Workflows() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px hover:after:opacity-20 group-hover:before:opacity-100"
+                className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px hover:after:opacity-20 group-hover:before:opacity-100 transition-shadow duration-300"
               >
-                <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 p-4 sm:p-6">
+                <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 p-4 sm:p-6 flex flex-col">
                   <Image
                     src={item.img}
                     width={350}
                     height={288}
                     alt={item.title}
                     className="w-full max-w-[200px] sm:max-w-full mx-auto h-auto object-contain mb-4"
+                    priority
                   />
                   <h3 className="text-lg sm:text-xl font-semibold text-[#E0F7FF] text-center">
                     {item.title}
@@ -56,7 +57,7 @@ export default function Workflows() {
                   <p className="text-sm text-[#AEE8FF] text-center mb-3">
                     {item.date}
                   </p>
-                  <p className="text-[#D1EAF5]/70 text-sm sm:text-base text-justify">
+                  <p className="text-[#D1EAF5]/70 text-sm sm:text-base text-justify flex-grow">
                     {item.desc}
                   </p>
                 </div>
