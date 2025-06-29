@@ -25,7 +25,7 @@ export default function RegisterNow() {
           {/* Left-aligned Button */}
           <div className="flex justify-start">
             <Link
-              href="/register"
+              href="/signup"
               className="inline-block rounded-full bg-gradient-to-r from-[#00C3FF] to-[#0068FF] px-8 py-3 text-sm sm:text-base font-medium text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
             >
               Register Now
