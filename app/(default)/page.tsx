@@ -13,6 +13,7 @@ import Cta from "@/components/cta";
 import Chatbot from "@/components/Chatbot";
 import RegisterNow from "@/components/RegisterNow";
 import Preloader from "@/components/Preloader";
+import SponsorSlider from "@/components/SponsorSlider";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <RegisterNow />
       <Workflows />
       <Testimonials />
+      <SponsorSlider/>
       <Cta />
       <Chatbot />
     </>
