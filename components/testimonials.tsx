@@ -38,34 +38,31 @@ export default function MerchandiseSection() {
             >
               Merchandise
             </h2>
-
             <p className="text-lg text-[#00C3FF]/70">
               Get your official CloudSpace gear and show off your passion for cloud tech.
             </p>
           </div>
 
           {/* Merchandise Cards */}
-          <div className="mx-auto grid max-w-sm items-start gap-6 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-sm items-stretch gap-6 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
             {merchandise.map((item, index) => (
               <article
                 key={index}
-                className="group relative rounded-2xl bg-gray-900/50 p-5 backdrop-blur-xs transition hover:shadow-2xl"
+                className="group relative flex h-full flex-col justify-between rounded-2xl bg-gray-900/50 p-5 backdrop-blur-xs transition hover:shadow-2xl"
                 style={{
                   animation: "floatGlowSubtle 6s ease-in-out infinite",
                 }}
               >
-                <div className="flex flex-col gap-4 items-center text-center">
+                <div className="flex flex-col gap-4 items-center text-center h-full">
                   <Image
-                    className="rounded-lg"
+                    className="rounded-lg object-cover max-h-60 w-full"
                     src={item.img}
                     alt={item.title}
                     width={400}
                     height={300}
                     priority
                   />
-                  <h3 className="text-lg font-semibold text-gray-100">
-                    {item.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-100">{item.title}</h3>
                   <p className="text-sm text-[#00C3FF]/70">{item.description}</p>
                 </div>
               </article>
