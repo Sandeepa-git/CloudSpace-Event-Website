@@ -26,9 +26,11 @@ export default function MerchandiseSection() {
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-2 text-xl sm:text-2xl md:text-3xl font-semibold text-transparent">
               Merchandise
             </h2>
-            <p className="text-sm sm:text-base text-[#00C3FF]/70">
-              Get your official CloudSpace gear and show off your passion for cloud tech.
-            </p>
+            {showMerchandise && (
+              <p className="text-sm sm:text-base text-[#00C3FF]/70">
+                Get your official CloudSpace gear and show off your passion for cloud tech.
+              </p>
+            )}
           </div>
 
           {showMerchandise ? (

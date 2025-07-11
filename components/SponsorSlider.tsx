@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const sponsors = ["/images/KnowledgePt.jpg"];
+const sponsors = ["/images/awsdevgr.png"];
 
 export default function SponsorSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,50 +12,34 @@ export default function SponsorSlider() {
       setCurrentIndex((prevIndex) =>
         prevIndex === sponsors.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Change every 3 seconds
-
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  // Reduced opacity glow
-  const glowFilter =
-    `drop-shadow(0 0 6px rgba(0, 195, 255, 0.4)) ` +
-    `drop-shadow(0 0 8px rgba(0, 104, 255, 0.4)) ` +
-    `drop-shadow(0 0 10px rgba(0, 195, 255, 0.4)) ` +
-    `drop-shadow(1.5px 0 6px rgba(0, 195, 255, 0.4)) ` +
-    `drop-shadow(-1.5px 0 6px rgba(0, 195, 255, 0.4)) ` +
-    `drop-shadow(0 1.5px 6px rgba(0, 195, 255, 0.4)) ` +
-    `drop-shadow(0 -1.5px 6px rgba(0, 195, 255, 0.4))`;
-
   return (
-    <section className="w-full bg-[#0B0F19] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#0B0F19] py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl font-semibold mb-8">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text animate-gradient-move">
           Knowledge Partner
         </h2>
 
-        <div className="relative w-full h-[140px] overflow-visible flex flex-col items-center justify-center">
+        <div className="relative w-full h-[160px] sm:h-[180px] flex items-center justify-center">
           {sponsors.map((src, index) => (
-            <div
-              key={index}
-              className={`absolute transition-opacity duration-1000 ease-in-out flex flex-col items-center ${
-                index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ transition: "opacity 1s ease, filter 1s ease" }}
-            >
+            <div key={index} className="absolute flex flex-col items-center">
               <img
                 src={src}
                 alt={`Sponsor ${index + 1}`}
-                className="object-contain"
+                className={`object-contain ${
+                  index === currentIndex ? "animate-glow" : ""
+                }`}
                 style={{
-                  width: "240px",
-                  height: "120px",
-                  filter: index === currentIndex ? glowFilter : "none",
+                  width: "300px",
+                  height: "130px",
                 }}
               />
-              <div className="mt-6 text-white text-sm sm:text-base font-medium leading-tight text-center">
-                <p>AWS USER GROUPS</p>
-                <p>COLOMBO</p>
+              <div className="mt-6 text-white text-base sm:text-lg font-semibold tracking-wide">
+                <p className="text-blue-000">AWS USER GROUPS</p>
+                <p className="text-blue-000">COLOMBO</p>
               </div>
             </div>
           ))}
@@ -63,13 +47,40 @@ export default function SponsorSlider() {
       </div>
 
       <style jsx>{`
-        @keyframes gradient {
+        @keyframes gradient-move {
           0% {
             background-position: 0% center;
           }
           100% {
             background-position: -200% center;
           }
+        }
+
+        .animate-gradient-move {
+          background-size: 200% auto;
+          animation: gradient-move 6s linear infinite;
+        }
+
+        @keyframes glowPulse {
+          0% {
+            filter: drop-shadow(0 0 3px rgba(0, 195, 255, 0.25))
+              drop-shadow(0 0 4px rgba(0, 104, 255, 0.2))
+              drop-shadow(0 0 5px rgba(0, 195, 255, 0.25));
+          }
+          50% {
+            filter: drop-shadow(0 0 4px rgba(0, 195, 255, 0.35))
+              drop-shadow(0 0 6px rgba(0, 104, 255, 0.3))
+              drop-shadow(0 0 7px rgba(0, 195, 255, 0.35));
+          }
+          100% {
+            filter: drop-shadow(0 0 3px rgba(0, 195, 255, 0.25))
+              drop-shadow(0 0 4px rgba(0, 104, 255, 0.2))
+              drop-shadow(0 0 5px rgba(0, 195, 255, 0.25));
+          }
+        }
+
+        .animate-glow {
+          animation: glowPulse 2.5s ease-in-out infinite;
         }
       `}</style>
     </section>
