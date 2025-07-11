@@ -38,8 +38,8 @@ export default function SponsorSlider() {
                 }}
               />
               <div className="mt-6 text-white text-base sm:text-lg font-semibold tracking-wide">
-                <p className="text-blue-000">AWS USER GROUPS</p>
-                <p className="text-blue-000">COLOMBO</p>
+                <p className="text-blue-000"></p>
+                <p className="text-blue-000"></p>
               </div>
             </div>
           ))}
