@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import TshirtFront from "@/public/images/TshirtFront.png";
-import TshirtBack from "@/public/images/TshirtBack.png";
+import TshirtFront from '@/public/images/tshirtfront.png';
+import TshirtBack from '@/public/images/tshirtback.png';
+
 
 export default function MerchandiseSection() {
   const [showMerchandise, setShowMerchandise] = useState(false);
