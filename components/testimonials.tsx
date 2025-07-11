@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import TshirtFront from '@/public/images/tshirtfront.png';
-import TshirtBack from '@/public/images/tshirtback.png';
 
+const TshirtFront = "/images/tshirtfront.png";
+const TshirtBack = "/images/tshirtback.png";
 
 export default function MerchandiseSection() {
   const [showMerchandise, setShowMerchandise] = useState(false);
@@ -12,7 +12,6 @@ export default function MerchandiseSection() {
   useEffect(() => {
     const now = new Date();
     const targetDate = new Date("2025-07-19T00:00:00");
-
     if (now >= targetDate) {
       setShowMerchandise(true);
     }
@@ -22,12 +21,9 @@ export default function MerchandiseSection() {
     <section>
       <div id="merchandise" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="border-t py-8 md:py-12">
-          {/* Section Header */}
+          {/* Header */}
           <div className="mx-auto max-w-xl pb-8 text-center">
-            <h2
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-2 text-xl sm:text-2xl md:text-3xl font-semibold text-transparent"
-              style={{ transition: "background-position 0.5s ease-in-out" }}
-            >
+            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-2 text-xl sm:text-2xl md:text-3xl font-semibold text-transparent">
               Merchandise
             </h2>
             <p className="text-sm sm:text-base text-[#00C3FF]/70">
@@ -37,19 +33,16 @@ export default function MerchandiseSection() {
 
           {showMerchandise ? (
             <>
-              {/* T-shirt Front & Back */}
               <div className="mx-auto grid gap-4 sm:grid-cols-2">
                 {/* Front */}
-                <article
-                  className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg"
-                  style={{ animation: "floatGlowSubtle 6s ease-in-out infinite" }}
-                >
-                  <div className="w-full max-w-[220px] aspect-[3/5] relative">
+                <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
+                  <div className="w-full max-w-[220px]">
                     <Image
                       className="rounded-md object-contain"
                       src={TshirtFront}
                       alt="CloudSpace T-shirt Front"
-                      fill
+                      width={220}
+                      height={367}
                       priority
                     />
                   </div>
@@ -57,16 +50,14 @@ export default function MerchandiseSection() {
                 </article>
 
                 {/* Back */}
-                <article
-                  className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg"
-                  style={{ animation: "floatGlowSubtle 6s ease-in-out infinite" }}
-                >
-                  <div className="w-full max-w-[220px] aspect-[3/5] relative">
+                <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
+                  <div className="w-full max-w-[220px]">
                     <Image
                       className="rounded-md object-contain"
                       src={TshirtBack}
                       alt="CloudSpace T-shirt Back"
-                      fill
+                      width={220}
+                      height={367}
                       priority
                     />
                   </div>
@@ -74,7 +65,6 @@ export default function MerchandiseSection() {
                 </article>
               </div>
 
-              {/* Order Now Button */}
               <div className="mt-6 text-center">
                 <button className="rounded-full bg-[#0068FF] px-4 py-2 text-sm text-white font-medium shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
                   Order Now
@@ -82,14 +72,11 @@ export default function MerchandiseSection() {
               </div>
             </>
           ) : (
-            <p className="text-xl text-center text-white">
-              Merchandise Dropping Soon
-            </p>
+            <p className="text-xl text-center text-white">Merchandise Dropping Soon</p>
           )}
         </div>
       </div>
 
-      {/* Float Animation */}
       <style jsx>{`
         @keyframes floatGlowSubtle {
           0%, 100% {
