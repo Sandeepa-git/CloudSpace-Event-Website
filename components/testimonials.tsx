@@ -1,89 +1,105 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import MerchandiseImg01 from "@/public/images/Bag.jpg";
-import MerchandiseImg02 from "@/public/images/Tshirt.jpg";
-import MerchandiseImg03 from "@/public/images/Bottle.jpg";
-
-const merchandise = [
-  {
-    img: MerchandiseImg01,
-    title: "CloudSpace Laptop Bag",
-    description: "Sleek and durable laptop bag designed for cloud professionals on the move.",
-  },
-  {
-    img: MerchandiseImg02,
-    title: "CloudSpace Tech T-shirt",
-    description: "Comfortable cotton tee featuring the CloudSpace logo with a futuristic design.",
-  },
-  {
-    img: MerchandiseImg03,
-    title: "CloudSpace Hydration Bottle",
-    description: "Insulated water bottle with a modern cloud-inspired circuit design to keep you refreshed.",
-  },
-];
+import TshirtFront from "@/public/images/TshirtFront.png";
+import TshirtBack from "@/public/images/TshirtBack.png";
 
 export default function MerchandiseSection() {
+  const [showMerchandise, setShowMerchandise] = useState(false);
+
+  useEffect(() => {
+    const now = new Date();
+    const targetDate = new Date("2025-07-19T00:00:00");
+
+    if (now >= targetDate) {
+      setShowMerchandise(true);
+    }
+  }, []);
+
   return (
     <section>
-      <div id="testimonials" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
-        <div className="border-t py-12 md:py-20">
-          {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-12 text-center">
+      <div id="merchandise" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="border-t py-8 md:py-12">
+          {/* Section Header */}
+          <div className="mx-auto max-w-xl pb-8 text-center">
             <h2
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent"
-              style={{
-                transition: "background-position 0.5s ease-in-out",
-              }}
+              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-2 text-xl sm:text-2xl md:text-3xl font-semibold text-transparent"
+              style={{ transition: "background-position 0.5s ease-in-out" }}
             >
               Merchandise
             </h2>
-            <p className="text-lg text-[#00C3FF]/70">
+            <p className="text-sm sm:text-base text-[#00C3FF]/70">
               Get your official CloudSpace gear and show off your passion for cloud tech.
             </p>
           </div>
 
-          {/* Merchandise Cards */}
-          <div className="mx-auto grid max-w-sm items-stretch gap-6 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
-            {merchandise.map((item, index) => (
-              <article
-                key={index}
-                className="group relative flex h-full flex-col justify-between rounded-2xl bg-gray-900/50 p-5 backdrop-blur-xs transition hover:shadow-2xl"
-                style={{
-                  animation: "floatGlowSubtle 6s ease-in-out infinite",
-                }}
-              >
-                <div className="flex flex-col gap-4 items-center text-center h-full">
-                  <Image
-                    className="rounded-lg object-cover max-h-60 w-full"
-                    src={item.img}
-                    alt={item.title}
-                    width={400}
-                    height={300}
-                    priority
-                  />
-                  <h3 className="text-lg font-semibold text-gray-100">{item.title}</h3>
-                  <p className="text-sm text-[#00C3FF]/70">{item.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          {showMerchandise ? (
+            <>
+              {/* T-shirt Front & Back */}
+              <div className="mx-auto grid gap-4 sm:grid-cols-2">
+                {/* Front */}
+                <article
+                  className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg"
+                  style={{ animation: "floatGlowSubtle 6s ease-in-out infinite" }}
+                >
+                  <div className="w-full max-w-[220px] aspect-[3/5] relative">
+                    <Image
+                      className="rounded-md object-contain"
+                      src={TshirtFront}
+                      alt="CloudSpace T-shirt Front"
+                      fill
+                      priority
+                    />
+                  </div>
+                  <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Front)</h3>
+                </article>
+
+                {/* Back */}
+                <article
+                  className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg"
+                  style={{ animation: "floatGlowSubtle 6s ease-in-out infinite" }}
+                >
+                  <div className="w-full max-w-[220px] aspect-[3/5] relative">
+                    <Image
+                      className="rounded-md object-contain"
+                      src={TshirtBack}
+                      alt="CloudSpace T-shirt Back"
+                      fill
+                      priority
+                    />
+                  </div>
+                  <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Back)</h3>
+                </article>
+              </div>
+
+              {/* Order Now Button */}
+              <div className="mt-6 text-center">
+                <button className="rounded-full bg-[#0068FF] px-4 py-2 text-sm text-white font-medium shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
+                  Order Now
+                </button>
+              </div>
+            </>
+          ) : (
+            <p className="text-xl text-center text-white">
+              Merchandise Dropping Soon
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Inline animation */}
+      {/* Float Animation */}
       <style jsx>{`
         @keyframes floatGlowSubtle {
-          0%,
-          100% {
+          0%, 100% {
             transform: translateY(0) scale(1);
-            box-shadow: 0 0 6px rgba(0, 195, 255, 0.15);
-            filter: drop-shadow(0 0 4px rgba(0, 195, 255, 0.15));
+            box-shadow: 0 0 4px rgba(0, 195, 255, 0.12);
+            filter: drop-shadow(0 0 3px rgba(0, 195, 255, 0.12));
           }
           50% {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 0 12px 2px rgba(0, 195, 255, 0.3);
-            filter: drop-shadow(0 0 8px rgba(0, 195, 255, 0.3));
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 0 8px rgba(0, 195, 255, 0.2);
+            filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.2));
           }
         }
       `}</style>

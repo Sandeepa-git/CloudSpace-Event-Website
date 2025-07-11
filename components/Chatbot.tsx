@@ -158,9 +158,9 @@ export default function GeminiChatbot() {
             <h4>📘 Quick Questions</h4>
             <details><summary>What is CloudSpace v1.0?</summary><p>It's a multi-phase AWS-focused cloud event hosted at SLTC.</p></details>
             <details><summary>Who can attend?</summary><p>All Sri Lankan undergraduates from state and non-state universities.</p></details>
-            <details><summary>When does it happen?</summary><p>On July 12, 19, and 26, 2025.</p></details>
+            <details><summary>When does it happen?</summary><p>On July 19, 26  2025.</p></details>
             <details><summary>What tools will we use?</summary><p>AWS, Docker, Kubernetes, GitHub, CI/CD, IAM, Lambda, EC2, and more.</p></details>
-            <details><summary>Where is it hosted?</summary><p>SLTC Trace Campus (Main Conference Hall).</p></details>
+            <details><summary>Where is it hosted?</summary><p>SLTC Research University (RB GF 3).</p></details>
           </div>
 
           <div ref={containerRef} className="chat-messages">

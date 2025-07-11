@@ -22,7 +22,7 @@ export default function HeroHome() {
       const now = new Date();
       const year = now.getMonth() === 11 ? now.getFullYear() + 1 : now.getFullYear();
       const month = (now.getMonth() + 1) % 12;
-      return new Date(year, 6, 12, 0, 0, 0).getTime();
+      return new Date(year, 6, 19, 0, 0, 0).getTime();
     }
 
     const targetDate = getNextMonth20th();

@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 
 const sponsors = [
   "/images/cocacola.png",
-  "/images/elephanthouse.png",
-  "/images/portcity.jpg",
-  "/images/munchee.png",
-  "/images/unilever.png",
 ];
 
 export default function SponsorSlider() {
@@ -39,7 +35,7 @@ export default function SponsorSlider() {
         <h2
           className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl font-semibold mb-8"
         >
-          Our Sponsors
+          Knowledge Partner
         </h2>
 
         <div className="relative w-full h-[90px] overflow-visible">

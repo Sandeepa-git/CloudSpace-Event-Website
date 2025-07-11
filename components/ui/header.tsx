@@ -1,17 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./logo";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [showRegisterButton, setShowRegisterButton] = useState(false);
   const pathname = usePathname();
 
-  // ✅ Hide Header only on `/signup` page (or `/auth/signup`)
+  // ✅ Hide Header on specific routes
   if (pathname === "/signup" || pathname === "/auth/signup") return null;
+
+  // Check if it's after July 14, 2025, 00:00
+  useEffect(() => {
+    const now = new Date();
+    const targetDate = new Date("2025-07-14T00:00:00");
+
+    if (now >= targetDate) {
+      setShowRegisterButton(true);
+    }
+  }, []);
 
   const handleAnimatedScroll = (id: string) => {
     const el = document.getElementById(id);
@@ -59,14 +69,16 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop Register Button */}
+          {/* Desktop Register Button (Hidden until July 14, 2025, 00:00) */}
           <div className="hidden md:flex flex-1 items-center justify-end gap-3">
-            <Link
-              href="/signup"
-              className="btn-sm bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-[5px] px-4 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.16)] hover:bg-[length:100%_150%] rounded transition-all duration-200 tracking-wide uppercase text-base text-center"
-            >
-              Register Now
-            </Link>
+            {showRegisterButton && (
+              <Link
+                href="/signup"
+                className="btn-sm bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-[5px] px-4 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.16)] hover:bg-[length:100%_150%] rounded transition-all duration-200 tracking-wide uppercase text-base text-center"
+              >
+                Register Now
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -107,13 +119,17 @@ export default function Header() {
                   </button>
                 </li>
               ))}
+
+              {/* Mobile Register Button (Hidden until July 14, 2025, 00:00) */}
               <li>
-                <Link
-                  href="/signup"
-                  className="btn-sm mx-auto bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-2 px-6 text-white rounded shadow transition hover:scale-105 tracking-wide uppercase text-base inline-block"
-                >
-                  Register Now
-                </Link>
+                {showRegisterButton && (
+                  <Link
+                    href="/signup"
+                    className="btn-sm mx-auto bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-2 px-6 text-white rounded shadow transition hover:scale-105 tracking-wide uppercase text-base inline-block"
+                  >
+                    Register Now
+                  </Link>
+                )}
               </li>
             </ul>
           </nav>

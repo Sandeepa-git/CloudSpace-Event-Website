@@ -1,63 +1,56 @@
 import Image from "next/image";
 import WorflowImg01 from "@/public/images/badgebasic.png";
-import WorflowImg02 from "@/public/images/badgeintermediate.png";
-import WorflowImg03 from "@/public/images/badgeadvance.png";
+import WorflowImgCombined from "@/public/images/badgeadvance.png";
 import Spotlight from "@/components/spotlight";
 
 export default function Workflows() {
   return (
-    <section id="workflows" className="py-8 sm:py-12 md:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
-        <div className="pb-8 sm:pb-12 md:pb-20">
+    <section id="workflows" className="py-6 sm:py-10 md:py-16">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <div className="pb-6 sm:pb-10 md:pb-16">
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-8 sm:pb-12 text-center md:pb-20">
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent">
+          <div className="mx-auto max-w-2xl pb-6 sm:pb-10 text-center md:pb-16">
+            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-3 font-nacelle text-xl sm:text-2xl md:text-3xl font-semibold text-transparent">
               Event Timeline
             </h2>
           </div>
 
           {/* Spotlight items */}
-          <Spotlight className="group mx-auto grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <Spotlight className="group mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2">
             {[
               {
                 img: WorflowImg01,
-                title: "Cloud Fundamentals",
-                date: "July 12, 2025",
-                desc: "This phase targets 1st and 2nd year undergraduates, helping them build a strong foundation in cloud computing concepts and understand the importance of cloud technologies in today’s world. The day features interactive sessions led by industry experts and engaging quizzes to reinforce learning and encourage active participation.",
-              },
-              {
-                img: WorflowImg02,
-                title: "Cloud Infrastructure & Design",
+                title: "Day 1 – Cloud Fundamentals",
                 date: "July 19, 2025",
-                desc: "This phase focuses on cloud architecture, components, and best practices for designing cloud systems. The main target audience is 3rd and 4th year undergraduates, but any undergraduate with an interest in these topics is welcome to join. Includes workshops, demos, and quizzes.",
+                desc: "On the first day of the event, 19th July 2025, from 10:00 AM to 1:00 PM, at the SLTC Padukka premises, CloudSpace v1.0 will begin with a deep dive into the fundamentals of cloud computing. Participants will explore essential concepts such as service models (IaaS, PaaS, SaaS), deployment models (public, private, hybrid), and the evolution of cloud technologies. Through real-world examples and interactive discussions, this session will provide a strong foundation for understanding how cloud computing is transforming the tech landscape"
               },
               {
-                img: WorflowImg03,
-                title: "Cloud App Development & Security",
+                img: WorflowImgCombined,
+                title: "Day 2 – Infrastructure, Application Development & Security",
                 date: "July 26, 2025",
-                desc: "The final phase dives into developing, deploying, and securing applications in the cloud. All undergraduates are encouraged to participate. This phase offers technical sessions, workshops, demos, and quizzes focused on secure cloud-based solutions.",
+                desc: "On the second day of the event, 26th July 2025, from 10:00 AM to 4:00 PM, at the SLTC Padukka premises, participants will take a practical leap into AWS infrastructure, application development, and cloud security. The session will cover core AWS services such as S3, EC2, Lambda, and IAM, with hands-on deployment of a full-stack application using GitHub. It will also introduce DevOps tools like Docker and CI/CD pipelines, along with key security practices to help participants understand how to build and secure modern cloud applications effectively.",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px hover:after:opacity-20 group-hover:before:opacity-100 transition-shadow duration-300"
+                className="group/card relative h-full overflow-hidden rounded-xl bg-gray-800 p-px hover:after:opacity-20 group-hover:before:opacity-100 transition-shadow duration-300"
               >
-                <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 p-4 sm:p-6 flex flex-col">
+                <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 p-4 sm:p-5 flex flex-col">
                   <Image
                     src={item.img}
-                    width={350}
-                    height={288}
+                    width={300}
+                    height={250}
                     alt={item.title}
-                    className="w-full max-w-[200px] sm:max-w-full mx-auto h-auto object-contain mb-4"
+                    className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[180px] mx-auto h-auto object-contain mb-3"
                     priority
                   />
-                  <h3 className="text-lg sm:text-xl font-semibold text-[#E0F7FF] text-center">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#E0F7FF] text-center mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#AEE8FF] text-center mb-3">
+                  <p className="text-xs sm:text-sm text-[#AEE8FF] text-center mb-2">
                     {item.date}
                   </p>
-                  <p className="text-[#D1EAF5]/70 text-sm sm:text-base text-left flex-grow">
+                  <p className="text-[#D1EAF5]/70 text-xs sm:text-sm text-left flex-grow leading-snug">
                     {item.desc}
                   </p>
                 </div>
