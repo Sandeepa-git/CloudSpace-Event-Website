@@ -21,7 +21,7 @@ export default function RegisterNow() {
       className="relative z-10 bg-gray-950 py-12 px-4 sm:px-6 md:px-12 lg:px-24"
     >
       <div className="max-w-4xl mx-auto">
-        <div className="rounded-2xl bg-gray-900/70 border border-[rgba(0,195,255,0.1)] p-6 sm:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,195,255,0.3)] backdrop-blur-md animate-fade-in-up">
+        <div className="rounded-2xl bg-gray-900/70 border border-[rgba(0,195,255,0.1)] p-6 sm:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,195,255,0.3)] backdrop-blur-md animate-float-glow">
           {showContent ? (
             <>
               {/* Left-aligned Gradient Heading */}
@@ -47,11 +47,30 @@ export default function RegisterNow() {
             </>
           ) : (
             <p className="text-xl text-center text-white">
-              Registrations Coming Soon
+              Registrations Opening Soon
             </p>
           )}
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes floatGlowSubtle {
+          0%, 100% {
+            transform: translateY(0) scale(1);
+            box-shadow: 0 0 4px rgba(0, 195, 255, 0.1);
+            filter: drop-shadow(0 0 2px rgba(0, 195, 255, 0.1));
+          }
+          50% {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 0 12px rgba(0, 195, 255, 0.2);
+            filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.2));
+          }
+        }
+
+        .animate-float-glow {
+          animation: floatGlowSubtle 4s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

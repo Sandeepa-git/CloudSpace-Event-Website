@@ -26,9 +26,9 @@ export default function Workflows() {
               },
               {
                 img: WorflowImgCombined,
-                title: "Day 2 – Infrastructure, Application Development & Security",
+                title: "Day 2 – Infrastructure, Application Development, DevOps & Security",
                 date: "July 26, 2025",
-                desc: "On the second day of the event, 26th July 2025, from 10:00 AM to 4:00 PM, at the SLTC Padukka premises, participants will take a practical leap into AWS infrastructure, application development, and cloud security. The session will cover core AWS services such as S3, EC2, Lambda, and IAM, with hands-on deployment of a full-stack application using GitHub. It will also introduce DevOps tools like Docker and CI/CD pipelines, along with key security practices to help participants understand how to build and secure modern cloud applications effectively.",
+                desc: "On the second day of the event, 26th July 2025, from 10:00 AM to 4:00 PM, at the SLTC Padukka premises, participants will take a practical leap into AWS infrastructure, application development, DevOps, and cloud security. The session will cover core AWS services such as S3, EC2, Lambda, and IAM, with hands-on deployment of a full-stack application using GitHub. Participants will also explore key DevOps practices, including containerization with Docker, implementing CI/CD pipelines, and automating deployments for scalable cloud applications. In addition, essential cloud security concepts will be introduced to ensure best practices in securing modern cloud-native environments.",
               },
             ].map((item, idx) => (
               <div

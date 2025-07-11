@@ -72,7 +72,9 @@ export default function MerchandiseSection() {
               </div>
             </>
           ) : (
-            <p className="text-xl text-center text-white">Merchandise Dropping Soon</p>
+            <p className="text-xl text-center text-white animate-merch-glow">
+              Merchandise Dropping Soon
+            </p>
           )}
         </div>
       </div>
@@ -89,6 +91,10 @@ export default function MerchandiseSection() {
             box-shadow: 0 0 8px rgba(0, 195, 255, 0.2);
             filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.2));
           }
+        }
+
+        .animate-merch-glow {
+          animation: floatGlowSubtle 3s ease-in-out infinite;
         }
       `}</style>
     </section>
