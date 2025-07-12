@@ -9,15 +9,23 @@ const sponsors = [
 export default function SponsorSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [showSlider, setShowSlider] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % sponsors.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
+    const now = new Date();
+    const revealTime = new Date("2025-07-15T19:00:00"); // 7 PM local time on July 15, 2025
+    setShowSlider(now >= revealTime);
+  }, []);
+
+  useEffect(() => {
+    if (!isPaused && showSlider) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % sponsors.length);
+      }, 3500);
+      return () => clearInterval(interval);
+    }
+  }, [isPaused, showSlider]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -37,6 +45,8 @@ export default function SponsorSlider() {
     }
     touchStartX.current = null;
   };
+
+  if (!showSlider) return null;
 
   return (
     <section className="w-full bg-[#0B0F19] py-12 px-4 sm:px-6 lg:px-8">
@@ -71,8 +81,8 @@ export default function SponsorSlider() {
                 alt={sponsor.name || `Sponsor ${index + 1}`}
                 className="object-contain mx-auto animate-glow"
                 style={{
-                  width: "80vw",        // Responsive width
-                  maxWidth: "320px",    // Max for larger screens
+                  width: "80vw",
+                  maxWidth: "320px",
                   height: "auto",
                 }}
               />

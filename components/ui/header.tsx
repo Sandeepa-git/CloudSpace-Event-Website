@@ -37,7 +37,7 @@ export default function Header() {
     { id: "features", label: "About Us" },
     { id: "workflows", label: "Event Timeline" },
     { id: "testimonials", label: "Merchandise" },
-    { id: "cta", label: "Organizing Committee" },
+    { id: "cta", label: "Contact Us" },
   ];
 
   return (
