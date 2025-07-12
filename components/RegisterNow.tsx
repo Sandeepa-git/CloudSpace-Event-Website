@@ -71,7 +71,7 @@ export default function RegisterNow() {
             </>
           ) : (
             <>
-              <p className="text-2xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
+              <p className="text-3xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
                 Registrations Opening Soon
               </p>
 

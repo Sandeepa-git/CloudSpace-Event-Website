@@ -56,7 +56,7 @@ export default function Workflows() {
                 <p className="text-xs sm:text-sm text-[#AEE8FF] text-center mb-2">
                   {item.date}
                 </p>
-                <p className="text-[#D1EAF5]/70 text-xs sm:text-sm leading-snug text-left flex-grow">
+                <p className="text-[#D1EAF5]/70 text-xs sm:text-sm leading-snug text-center flex-grow">
                   {item.desc}
                 </p>
               </div>
