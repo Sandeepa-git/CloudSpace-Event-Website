@@ -1,1 +1,1 @@
-
+A sleek and responsive event landing page for CloudSpace 2025, featuring event registration, merchandise showcase, and dynamic countdowns — built with Next.js, Tailwind CSS, Supabase, and Resend for email notifications.
