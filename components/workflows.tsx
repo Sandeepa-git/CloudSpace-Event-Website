@@ -8,11 +8,20 @@ export default function Workflows() {
     <section id="workflows" className="py-6 sm:py-10 md:py-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
         <div className="pb-6 sm:pb-10 md:pb-16">
-          {/* Section header */}
-          <div className="mx-auto max-w-2xl pb-6 sm:pb-10 text-center md:pb-16">
-            <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
-              Event Timeline
-            </h2>
+          {/* Section header with gradient lines */}
+          <div className="mx-auto max-w-2xl text-center mb-12">
+            <div className="flex items-center justify-center">
+              {/* Left Line */}
+              <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
+
+              {/* Heading */}
+              <h2 className="mx-4 text-3xl md:text-4xl font-extrabold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text animate-[gradient_6s_linear_infinite]">
+                Event Timeline
+              </h2>
+
+              {/* Right Line */}
+              <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
+            </div>
           </div>
 
           {/* Spotlight items */}
@@ -22,13 +31,13 @@ export default function Workflows() {
                 img: WorflowImg01,
                 title: "Phase 1 – Cloud Essentials & Future Impact",
                 date: "July 19, 2025",
-                desc: "Step into the world of cloud computing and discover how it’s revolutionizing industries worldwide. This module introduces the fundamentals of cloud technology and its transformative role across data science, software engineering, and cybersecurity. Gain a foundational understanding of key AWS services and cloud platforms, exploring how cloud computing delivers scalability, flexibility, and global reach. Learn how cloud innovation continues to drive the future of technology through practical applications and real-world impact. Whether you’re a student, professional, or tech enthusiast, this module provides the essential knowledge to understand and leverage the power of cloud computing."
+                desc: "Step into the world of cloud computing and discover how it’s revolutionizing industries worldwide. This module introduces the fundamentals of cloud technology and its transformative role across data science, software engineering, and cybersecurity. Gain a foundational understanding of key AWS services and cloud platforms, exploring how cloud computing delivers scalability, flexibility, and global reach. Learn how cloud innovation continues to drive the future of technology through practical applications and real-world impact. Whether you’re a student, professional, or tech enthusiast, this module provides the essential knowledge to understand and leverage the power of cloud computing.",
               },
               {
                 img: WorflowImgCombined,
                 title: "Phase 2 – Cloud Infrastructure, DevOps & Application Security",
                 date: "July 26, 2025",
-                desc: "Take your cloud knowledge to the next level with hands-on experience in real-world tools and frameworks. This phase focuses on building secure, scalable infrastructure and adopting modern DevOps practices using AWS. Explore essential AWS services such as S3 (storage), EC2 (compute), Lambda (serverless), and Fargate (container orchestration). Develop practical skills with DevOps tools like Docker, Kubernetes, and AWS CodePipeline to optimize development and deployment workflows. Apply the AWS Well-Architected Framework to design solutions that balance cost-efficiency, performance, reliability, and security. Additionally, utilize CloudWatch for real-time monitoring, logging, and operational insights. Whether you’re a developer, aspiring cloud architect, or tech enthusiast, this phase equips you with the critical skills to build and manage secure, cloud-native applications effectively",
+                desc: "Take your cloud knowledge to the next level with hands-on experience in real-world tools and frameworks. This phase focuses on building secure, scalable infrastructure and adopting modern DevOps practices using AWS. Explore essential AWS services such as S3 (storage), EC2 (compute), Lambda (serverless), and Fargate (container orchestration). Develop practical skills with DevOps tools like Docker, Kubernetes, and AWS CodePipeline to optimize development and deployment workflows. Apply the AWS Well-Architected Framework to design solutions that balance cost-efficiency, performance, reliability, and security. Additionally, utilize CloudWatch for real-time monitoring, logging, and operational insights. Whether you’re a developer, aspiring cloud architect, or tech enthusiast, this phase equips you with the critical skills to build and manage secure, cloud-native applications effectively.",
               },
             ].map((item, idx) => (
               <div

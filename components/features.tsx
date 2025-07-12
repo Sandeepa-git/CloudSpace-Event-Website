@@ -9,7 +9,7 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-12"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-12 bg-black"
     >
       {/* Background Shapes */}
       <div
@@ -39,20 +39,21 @@ export default function Features() {
         />
       </div>
 
-      {/* Main Section */}
+      {/* Content Container */}
       <div className="w-full max-w-6xl py-12 md:py-20 border-t border-[#00C3FF1A]">
-        {/* Label */}
-        <div className="flex flex-col items-center mb-10 sm:mb-12 ml-0 sm:ml-[-12px]">
-          <div className="inline-flex items-center gap-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-[#00C3FF80] after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-[#00C3FF80]">
-            <span className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
-              About Us
-            </span>
-          </div>
+
+        {/* 🔷 Gradient Heading with Lines */}
+        <div className="flex items-center justify-center gap-4 mb-10 sm:mb-12">
+          <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
+          <h2 className="animate-[gradient_6s_linear_infinite] text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text text-center">
+            About Us
+          </h2>
+          <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
         </div>
 
         {/* Content Grid */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-20 px-2 md:px-4">
-          {/* Image */}
+          {/* Left - Image */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-start">
             <Image
               src={FeaturesImage}
@@ -64,13 +65,11 @@ export default function Features() {
             />
           </div>
 
-          {/* Text */}
+          {/* Right - Text */}
           <div className="w-full md:w-1/2 max-w-xl text-center md:text-left flex flex-col justify-center">
-            <h2
-              className="animate-[gradient_6s_linear_infinite] text-xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
-            >
+            <h3 className="animate-[gradient_6s_linear_infinite] text-3xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
               Empowering Tomorrow’s Cloud Experts
-            </h2>
+            </h3>
             <p className="text-md leading-relaxed text-[#D1EAF5]/70">
               <strong className="text-[#E0F7FF]/70">CloudSpace v1.0</strong> is
               the pioneering cloud computing event organized by the IEEE

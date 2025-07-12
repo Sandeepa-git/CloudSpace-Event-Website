@@ -63,7 +63,8 @@ const teamMembers = [
     email: "agsvwimalasiri@gmail.com",
     contact: "0750997715",
     social: {
-      linkedin: "https://www.linkedin.com/in/sandeepa-vimukthi-wimalasiri-92ab0a277/",
+      linkedin:
+        "https://www.linkedin.com/in/sandeepa-vimukthi-wimalasiri-92ab0a277/",
     },
   },
 ];
@@ -90,12 +91,15 @@ export default function Cta() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-10 sm:py-12 md:py-20 rounded-lg">
           <div className="mx-auto max-w-3xl text-center">
-            <h2
-              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
-              data-aos="fade-up"
-            >
-              Meet Our Organizing Team
-            </h2>
+            
+            {/* 🔷 Gradient Header Line */}
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
+              <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
+                Meet Our Organizing Team
+              </h2>
+              <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
+            </div>
 
             {/* Team Cards */}
             <div
@@ -161,7 +165,7 @@ export default function Cta() {
         </div>
       </div>
 
-      {/* Animated Gradient Style */}
+      {/* 🔷 Gradient Animation */}
       <style jsx>{`
         @keyframes gradient {
           0%,
