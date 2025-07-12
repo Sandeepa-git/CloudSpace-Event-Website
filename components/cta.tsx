@@ -91,7 +91,6 @@ export default function Cta() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-10 sm:py-12 md:py-20 rounded-lg">
           <div className="mx-auto max-w-3xl text-center">
-            
             {/* 🔷 Gradient Header Line */}
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
@@ -119,7 +118,9 @@ export default function Cta() {
                       alt={name}
                       width={112}
                       height={112}
-                      className="object-cover"
+                      className={`object-cover transition-transform duration-300 ${
+                        imgSrc === "/images/Ravishka.jpg" ? "scale-130" : ""
+                      }`}
                       priority
                     />
                   </div>

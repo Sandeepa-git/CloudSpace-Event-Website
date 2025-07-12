@@ -8,7 +8,7 @@ export default function RegisterNow() {
 
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date("2025-07-14T00:00:00"); // Target date and time at midnight
+    const targetDate = new Date("2025-07-10T00:00:00"); // Target date and time at midnight
 
     if (now >= targetDate) {
       setShowContent(true);

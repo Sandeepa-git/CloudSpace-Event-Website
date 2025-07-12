@@ -25,7 +25,6 @@ type Errors = {
 };
 
 const universities = [
-  // Your universities list here ...
   "SLTC Research University",
   "University of Colombo",
   "University of Peradeniya",
@@ -58,7 +57,6 @@ const universities = [
   "Colombo International Nautical & Engineering College (CINEC)",
   "American College of Higher Education (ACHE)",
   "Institute of Chartered Accountants of Sri Lanka (CA Sri Lanka)",
-  // Add more as needed
 ];
 
 const academicYears = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
@@ -87,7 +85,7 @@ export default function SignUp() {
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const nameRegex = /^[A-Za-z]+$/; // Letters only
+  const nameRegex = /^[A-Za-z]+$/;
   const phoneRegex = /^\+?\d+$/;
 
   const validate = (): boolean => {
@@ -126,11 +124,13 @@ export default function SignUp() {
       valid = false;
     }
 
-    // University validation:
     if (!formData.university) {
       newErrors.university = "University is required";
       valid = false;
-    } else if (formData.university === "Other" && !formData.otherUniversity.trim()) {
+    } else if (
+      formData.university === "Other" &&
+      !formData.otherUniversity.trim()
+    ) {
       newErrors.otherUniversity = "Please enter your university name";
       valid = false;
     }
@@ -167,9 +167,10 @@ export default function SignUp() {
     setSuccessMessage("");
     if (!validate()) return;
 
-    // If university is 'Other', submit the otherUniversity value
     const universityToSubmit =
-      formData.university === "Other" ? formData.otherUniversity.trim() : formData.university;
+      formData.university === "Other"
+        ? formData.otherUniversity.trim()
+        : formData.university;
 
     try {
       const { error } = await supabase.from("Cloudspace Registration").insert([
@@ -185,37 +186,50 @@ export default function SignUp() {
 
       if (error) {
         alert("Failed to save data: " + error.message);
-      } else {
-        setSuccessMessage(
-          "Registration successful! You can now go back to home."
-        );
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          university: "",
-          otherUniversity: "",
-          year: "",
-          whatsapp: "",
-        });
-        setErrors({
-          firstName: "",
-          lastName: "",
-          email: "",
-          university: "",
-          otherUniversity: "",
-          year: "",
-          whatsapp: "",
-        });
+        return;
       }
+
+      setSuccessMessage(
+        "Registration successful! You can now go back to home."
+      );
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        university: "",
+        otherUniversity: "",
+        year: "",
+        whatsapp: "",
+      });
+
+      setErrors({
+        firstName: "",
+        lastName: "",
+        email: "",
+        university: "",
+        otherUniversity: "",
+        year: "",
+        whatsapp: "",
+      });
     } catch (error: any) {
       alert("An error occurred: " + error.message);
     }
   };
 
   const fields = [
-    { label: "First Name", id: "firstName", type: "text", autoComplete: "given-name" },
-    { label: "Last Name", id: "lastName", type: "text", autoComplete: "family-name" },
+    {
+      label: "First Name",
+      id: "firstName",
+      type: "text",
+      autoComplete: "given-name",
+    },
+    {
+      label: "Last Name",
+      id: "lastName",
+      type: "text",
+      autoComplete: "family-name",
+    },
     { label: "Email", id: "email", type: "email", autoComplete: "email" },
     {
       label: "WhatsApp Number",
@@ -242,7 +256,11 @@ export default function SignUp() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="mx-auto max-w-[400px]" noValidate>
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto max-w-[400px]"
+            noValidate
+          >
             <div className="space-y-5">
               {fields.map(({ label, id, type, autoComplete, placeholder }) => (
                 <div key={id}>
@@ -304,7 +322,9 @@ export default function SignUp() {
                   <option value="Other">Other</option>
                 </select>
                 {errors.university && (
-                  <p className="mt-1 text-xs text-red-500">{errors.university}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.university}
+                  </p>
                 )}
               </div>
 
@@ -315,7 +335,8 @@ export default function SignUp() {
                     htmlFor="otherUniversity"
                     className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
                   >
-                    Please specify your university <span className="text-red-500">*</span>
+                    Please specify your university{" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="otherUniversity"
@@ -333,7 +354,9 @@ export default function SignUp() {
                     autoComplete="off"
                   />
                   {errors.otherUniversity && (
-                    <p className="mt-1 text-xs text-red-500">{errors.otherUniversity}</p>
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors.otherUniversity}
+                    </p>
                   )}
                 </div>
               )}

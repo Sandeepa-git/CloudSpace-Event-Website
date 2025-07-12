@@ -6,22 +6,22 @@ import Link from "next/link";
 import Logo from "./logo";
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showRegisterButton, setShowRegisterButton] = useState(false);
-  const pathname = usePathname();
 
-  // ✅ Hide Header on specific routes
-  if (pathname === "/signup" || pathname === "/auth/signup") return null;
-
-  // Check if it's after July 14, 2025, 00:00
+  // ✅ Call this hook unconditionally
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date("2025-07-14T00:00:00");
-
+    const targetDate = new Date("2025-07-10T00:00:00");
     if (now >= targetDate) {
       setShowRegisterButton(true);
     }
   }, []);
+
+  // ✅ Only check condition after hooks
+  const shouldHideHeader = pathname === "/signup" || pathname === "/auth/signup";
+  if (shouldHideHeader) return null;
 
   const handleAnimatedScroll = (id: string) => {
     const el = document.getElementById(id);
@@ -69,7 +69,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop Register Button (Hidden until July 14, 2025, 00:00) */}
+          {/* Desktop Register Button */}
           <div className="hidden md:flex flex-1 items-center justify-end gap-3">
             {showRegisterButton && (
               <Link
@@ -120,7 +120,6 @@ export default function Header() {
                 </li>
               ))}
 
-              {/* Mobile Register Button (Hidden until July 14, 2025, 00:00) */}
               <li>
                 {showRegisterButton && (
                   <Link

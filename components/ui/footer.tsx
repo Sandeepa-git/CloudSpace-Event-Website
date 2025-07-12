@@ -103,7 +103,7 @@ export default function Footer() {
                   
                 </a>
               </p>
-              <p><br></br>Sri Lanka Technological Campus,<br />Colombo, Sri Lanka</p>
+              <p><br></br>Sri Lanka Technology Campus,<br />Colombo, Sri Lanka</p>
             </div>
           </div>
 
@@ -139,7 +139,7 @@ export default function Footer() {
             <ul className="flex justify-center md:justify-start gap-6 text-[#ffffff]">
               <li>
                 <a
-                  href="https://web.facebook.com/sltcieeecs"
+                  href="http://facebook.com/CloudSpacelk"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -150,7 +150,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.instagram.com/sltcieeecs/"
+                  href="https://www.instagram.com/cloudspacelk/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -161,7 +161,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.linkedin.com/company/sltcieeecs/posts/?feedView=all"
+                  href="https://www.linkedin.com/company/cloudspacelk/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
