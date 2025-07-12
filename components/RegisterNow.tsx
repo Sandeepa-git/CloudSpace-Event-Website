@@ -5,14 +5,38 @@ import Link from "next/link";
 
 export default function RegisterNow() {
   const [showContent, setShowContent] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    const now = new Date();
-    const targetDate = new Date("2025-07-14T19:00:00"); // Target date and time at midnight
+    const targetDate = new Date("2025-07-14T19:00:00");
 
-    if (now >= targetDate) {
-      setShowContent(true);
-    }
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setShowContent(true);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (60 * 60 * 24));
+      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    updateCountdown(); // Run immediately
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -24,18 +48,18 @@ export default function RegisterNow() {
         <div className="rounded-2xl bg-gray-900/70 border border-[rgba(0,195,255,0.1)] p-6 sm:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,195,255,0.3)] backdrop-blur-md animate-float-glow">
           {showContent ? (
             <>
-              {/* Left-aligned Gradient Heading */}
+              {/* Heading */}
               <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
                 Ready to Join the CloudSpace Experience?
               </h2>
 
-              {/* Left-aligned Description */}
+              {/* Description */}
               <p className="text-[#D1EAF5]/70 text-base sm:text-lg text-left mb-8">
                 Secure your spot and be a part of our transformative cloud journey.
                 Register now to reserve your seat for all event phases!
               </p>
 
-              {/* Left-aligned Button */}
+              {/* Button */}
               <div className="flex justify-start">
                 <Link
                   href="/signup"
@@ -46,9 +70,16 @@ export default function RegisterNow() {
               </div>
             </>
           ) : (
-            <p className="text-2xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
-              Registrations Opening Soon
-            </p>
+            <>
+              <p className="text-2xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
+                Registrations Opening Soon
+              </p>
+
+              {/* Countdown */}
+              <div className="text-center text-[#00C3FF]/80 font-mono text-sm sm:text-base">
+                {`${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}
+              </div>
+            </>
           )}
         </div>
       </div>

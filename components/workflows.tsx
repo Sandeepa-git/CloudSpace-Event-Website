@@ -27,16 +27,14 @@ export default function Workflows() {
               img: WorflowImg01,
               title: "Phase 1 – Cloud Essentials & Future Impact",
               date: "July 19, 2025",
-              desc: `Step into the world of cloud computing and discover how it’s revolutionizing industries worldwide. 
-              This module introduces the fundamentals of cloud technology and its role across data science, 
-              software engineering, and cybersecurity.`,
+              desc: `Step into the world of cloud computing and discover how it’s revolutionizing industries worldwide. This module introduces the fundamentals of cloud technology and its transformative role across data science, software engineering, and cybersecurity. Gain a foundational understanding of key AWS services and cloud platforms, exploring how cloud computing delivers scalability, flexibility, and global reach. Learn how cloud innovation continues to drive the future of technology through practical applications and real-world impact. Whether you’re a student, professional, or tech enthusiast, this module provides the essential knowledge to understand and leverage the power of cloud computing.
+`,
             },
             {
               img: WorflowImgCombined,
               title: "Phase 2 – Cloud Infrastructure, DevOps & App Security",
               date: "July 26, 2025",
-              desc: `Take your cloud knowledge to the next level with hands-on tools and frameworks. Learn AWS core services,
-              DevOps workflows, container orchestration, and monitoring via CloudWatch.`,
+              desc: `Take your cloud knowledge to the next level with hands-on experience in real-world tools and frameworks. This phase focuses on building secure, scalable infrastructure and adopting modern DevOps practices using AWS. Explore essential AWS services such as S3 (storage), EC2 (compute), Lambda (serverless), and Fargate (container orchestration). Develop practical skills with DevOps tools like Docker, Kubernetes, and AWS CodePipeline to optimize development and deployment workflows. Apply the AWS Well-Architected Framework to design solutions that balance cost-efficiency, performance, reliability, and security. Additionally, utilize CloudWatch for real-time monitoring, logging, and operational insights. Whether you’re a developer, aspiring cloud architect, or tech enthusiast, this phase equips you with the critical skills to build and manage secure, cloud-native applications effectively`,
             },
           ].map((item, idx) => (
             <div

@@ -17,6 +17,9 @@ export default function MerchandiseSection() {
     }
   }, []);
 
+  // ❌ Hide the entire section before the target date
+  if (!showMerchandise) return null;
+
   return (
     <section>
       <div id="merchandise" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -31,60 +34,48 @@ export default function MerchandiseSection() {
               <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
             </div>
 
-            {showMerchandise && (
-              <p className="text-sm sm:text-base text-[#00C3FF]/70">
-                Get your official CloudSpace gear and show off your passion for cloud tech.
-              </p>
-            )}
+            <p className="text-sm sm:text-base text-[#00C3FF]/70">
+              Get your official CloudSpace gear and show off your passion for cloud tech.
+            </p>
           </div>
 
-          {showMerchandise ? (
-            <>
-              <div className="mx-auto grid gap-4 sm:grid-cols-2">
-                {/* Front */}
-                <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
-                  <div className="w-full max-w-[220px]">
-                    <Image
-                      className="rounded-md object-contain"
-                      src={TshirtFront}
-                      alt="CloudSpace T-shirt Front"
-                      width={220}
-                      height={367}
-                      priority
-                    />
-                  </div>
-                  <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Front)</h3>
-                </article>
-
-                {/* Back */}
-                <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
-                  <div className="w-full max-w-[220px]">
-                    <Image
-                      className="rounded-md object-contain"
-                      src={TshirtBack}
-                      alt="CloudSpace T-shirt Back"
-                      width={220}
-                      height={367}
-                      priority
-                    />
-                  </div>
-                  <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Back)</h3>
-                </article>
+          <div className="mx-auto grid gap-4 sm:grid-cols-2">
+            {/* Front */}
+            <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
+              <div className="w-full max-w-[220px]">
+                <Image
+                  className="rounded-md object-contain"
+                  src={TshirtFront}
+                  alt="CloudSpace T-shirt Front"
+                  width={220}
+                  height={367}
+                  priority
+                />
               </div>
+              <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Front)</h3>
+            </article>
 
-              <div className="mt-6 text-center">
-                <button className="rounded-full bg-[#0068FF] px-4 py-2 text-sm text-white font-medium shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
-                  Order Now
-                </button>
+            {/* Back */}
+            <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
+              <div className="w-full max-w-[220px]">
+                <Image
+                  className="rounded-md object-contain"
+                  src={TshirtBack}
+                  alt="CloudSpace T-shirt Back"
+                  width={220}
+                  height={367}
+                  priority
+                />
               </div>
-            </>
-          ) : (
-            <div className="mx-auto max-w-md rounded-xl bg-gray-900/50 p-6 text-center backdrop-blur-sm animate-merch-glow shadow-lg">
-              <h3 className="text-2xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
-                Merchandise Dropping Soon
-              </h3>
-            </div>
-          )}
+              <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Back)</h3>
+            </article>
+          </div>
+
+          <div className="mt-6 text-center">
+            <button className="rounded-full bg-[#0068FF] px-4 py-2 text-sm text-white font-medium shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
+              Order Now
+            </button>
+          </div>
         </div>
       </div>
 
