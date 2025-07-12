@@ -11,7 +11,7 @@ export default function MerchandiseSection() {
 
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date("2025-07-19T00:00:00");
+    const targetDate = new Date("2025-07-19T19:00:00");
     if (now >= targetDate) {
       setShowMerchandise(true);
     }
