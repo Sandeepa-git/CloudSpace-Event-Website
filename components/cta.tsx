@@ -119,7 +119,7 @@ export default function Cta() {
                       priority
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-white truncate">{name}</h3>
+                  <h3 className="text-md font-semibold text-white truncate">{name}</h3>
                   <p className="mb-2 text-blue-300">{role}</p>
 
                   {/* Contact Icons */}
