@@ -91,19 +91,19 @@ export default function Footer() {
                   href="mailto:info@cloudspace.com"
                   className="underline hover:text-[#0068FF]"
                 >
-                  sltcieeecs@gmail.com
+                  cloudspacesltc@gmail.com
                 </a>
               </p>
               <p>
-                <strong>Phone:</strong>{" "}
+                <strong></strong>{" "}
                 <a
                   href="tel:+94123456789"
                   className="underline hover:text-[#0068FF]"
                 >
-                  +94 123 456 789
+                  
                 </a>
               </p>
-              <p>Sri Lanka Technological Campus,<br />Colombo, Sri Lanka</p>
+              <p><br></br>Sri Lanka Technological Campus,<br />Colombo, Sri Lanka</p>
             </div>
           </div>
 

@@ -35,9 +35,9 @@ export default function Header() {
 
   const navItems = [
     { id: "features", label: "About Us" },
-    { id: "workflows", label: "Roadmap" },
+    { id: "workflows", label: "Event Timeline" },
     { id: "testimonials", label: "Merchandise" },
-    { id: "cta", label: "Contact Us" },
+    { id: "cta", label: "Organizing Committee" },
   ];
 
   return (

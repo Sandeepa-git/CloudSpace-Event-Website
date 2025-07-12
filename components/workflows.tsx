@@ -10,7 +10,7 @@ export default function Workflows() {
         <div className="pb-6 sm:pb-10 md:pb-16">
           {/* Section header */}
           <div className="mx-auto max-w-2xl pb-6 sm:pb-10 text-center md:pb-16">
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-3 font-nacelle text-xl sm:text-2xl md:text-3xl font-semibold text-transparent">
+            <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
               Event Timeline
             </h2>
           </div>
@@ -20,15 +20,15 @@ export default function Workflows() {
             {[
               {
                 img: WorflowImg01,
-                title: "Day 1 – Cloud Fundamentals",
+                title: "Phase 1 – Cloud Essentials & Future Impact",
                 date: "July 19, 2025",
-                desc: "On the first day of the event, 19th July 2025, from 10:00 AM to 1:00 PM, at the SLTC Padukka premises, CloudSpace v1.0 will begin with a deep dive into the fundamentals of cloud computing. Participants will explore essential concepts such as service models (IaaS, PaaS, SaaS), deployment models (public, private, hybrid), and the evolution of cloud technologies. Through real-world examples and interactive discussions, this session will provide a strong foundation for understanding how cloud computing is transforming the tech landscape"
+                desc: "Step into the world of cloud computing and discover how it’s revolutionizing industries worldwide. This module introduces the fundamentals of cloud technology and its transformative role across data science, software engineering, and cybersecurity. Gain a foundational understanding of key AWS services and cloud platforms, exploring how cloud computing delivers scalability, flexibility, and global reach. Learn how cloud innovation continues to drive the future of technology through practical applications and real-world impact. Whether you’re a student, professional, or tech enthusiast, this module provides the essential knowledge to understand and leverage the power of cloud computing."
               },
               {
                 img: WorflowImgCombined,
-                title: "Day 2 – Infrastructure, Application Development, DevOps & Security",
+                title: "Phase 2 – Cloud Infrastructure, DevOps & Application Security",
                 date: "July 26, 2025",
-                desc: "On the second day of the event, 26th July 2025, from 10:00 AM to 4:00 PM, at the SLTC Padukka premises, participants will take a practical leap into AWS infrastructure, application development, DevOps, and cloud security. The session will cover core AWS services such as S3, EC2, Lambda, and IAM, with hands-on deployment of a full-stack application using GitHub. Participants will also explore key DevOps practices, including containerization with Docker, implementing CI/CD pipelines, and automating deployments for scalable cloud applications. In addition, essential cloud security concepts will be introduced to ensure best practices in securing modern cloud-native environments.",
+                desc: "Take your cloud knowledge to the next level with hands-on experience in real-world tools and frameworks. This phase focuses on building secure, scalable infrastructure and adopting modern DevOps practices using AWS. Explore essential AWS services such as S3 (storage), EC2 (compute), Lambda (serverless), and Fargate (container orchestration). Develop practical skills with DevOps tools like Docker, Kubernetes, and AWS CodePipeline to optimize development and deployment workflows. Apply the AWS Well-Architected Framework to design solutions that balance cost-efficiency, performance, reliability, and security. Additionally, utilize CloudWatch for real-time monitoring, logging, and operational insights. Whether you’re a developer, aspiring cloud architect, or tech enthusiast, this phase equips you with the critical skills to build and manage secure, cloud-native applications effectively",
               },
             ].map((item, idx) => (
               <div

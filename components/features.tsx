@@ -44,7 +44,7 @@ export default function Features() {
         {/* Label */}
         <div className="flex flex-col items-center mb-10 sm:mb-12 ml-0 sm:ml-[-12px]">
           <div className="inline-flex items-center gap-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-[#00C3FF80] after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-[#00C3FF80]">
-            <span className="inline-flex bg-gradient-to-r from-[#00C3FF] to-[#0068FF] bg-clip-text text-transparent font-semibold text-sm md:text-base">
+            <span className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
               About Us
             </span>
           </div>
@@ -67,11 +67,11 @@ export default function Features() {
           {/* Text */}
           <div className="w-full md:w-1/2 max-w-xl text-center md:text-left flex flex-col justify-center">
             <h2
-              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
+              className="animate-[gradient_6s_linear_infinite] text-xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
             >
               Empowering Tomorrow’s Cloud Experts
             </h2>
-            <p className="text-lg leading-relaxed text-[#D1EAF5]/70">
+            <p className="text-md leading-relaxed text-[#D1EAF5]/70">
               <strong className="text-[#E0F7FF]/70">CloudSpace v1.0</strong> is
               the pioneering cloud computing event organized by the IEEE
               Computer Society Student Branch Chapter of SLTC. This initiative

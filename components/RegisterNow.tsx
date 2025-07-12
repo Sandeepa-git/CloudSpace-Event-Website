@@ -25,7 +25,7 @@ export default function RegisterNow() {
           {showContent ? (
             <>
               {/* Left-aligned Gradient Heading */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-left bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-clip-text text-transparent animate-[gradient_6s_linear_infinite] bg-[length:200%_auto] mb-4">
+              <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
                 Ready to Join the CloudSpace Experience?
               </h2>
 
@@ -46,7 +46,7 @@ export default function RegisterNow() {
               </div>
             </>
           ) : (
-            <p className="text-xl text-center text-white">
+            <p className="text-2xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
               Registrations Opening Soon
             </p>
           )}

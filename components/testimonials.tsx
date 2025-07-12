@@ -23,7 +23,7 @@ export default function MerchandiseSection() {
         <div className="border-t py-8 md:py-12">
           {/* Header */}
           <div className="mx-auto max-w-xl pb-8 text-center">
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text pb-2 text-xl sm:text-2xl md:text-3xl font-semibold text-transparent">
+            <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
               Merchandise
             </h2>
             {showMerchandise && (
@@ -74,9 +74,14 @@ export default function MerchandiseSection() {
               </div>
             </>
           ) : (
-            <p className="text-xl text-center text-white animate-merch-glow">
-              Merchandise Dropping Soon
-            </p>
+            <div className="mx-auto max-w-md rounded-xl bg-gray-900/50 p-6 text-center backdrop-blur-sm animate-merch-glow shadow-lg">
+              <h3 className="text-2xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
+                Merchandise Dropping Soon
+              </h3>
+              <p className="text-sm sm:text-base text-[#D1EAF5]/70">
+                
+              </p>
+            </div>
           )}
         </div>
       </div>

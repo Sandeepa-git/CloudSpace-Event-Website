@@ -91,7 +91,7 @@ export default function Cta() {
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-10 sm:py-12 md:py-20 rounded-lg">
           <div className="mx-auto max-w-3xl text-center">
             <h2
-              className="animate-gradient bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text text-transparent pb-8 font-nacelle text-3xl sm:text-4xl font-semibold"
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
               data-aos="fade-up"
             >
               Meet Our Organizing Team
