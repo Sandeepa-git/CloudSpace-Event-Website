@@ -14,6 +14,7 @@ import Chatbot from "@/components/Chatbot";
 import RegisterNow from "@/components/RegisterNow";
 import Preloader from "@/components/Preloader";
 import SponsorSlider from "@/components/SponsorSlider";
+import DigitalPartner from "@/components/DigitalPartner";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <Workflows />
       <Testimonials />
       <SponsorSlider/>
+      <DigitalPartner />
       <Cta />
       <Chatbot />
     </>
