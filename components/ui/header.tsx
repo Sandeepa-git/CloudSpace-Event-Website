@@ -13,7 +13,7 @@ export default function Header() {
   // ✅ Call this hook unconditionally
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date("2025-07-14T00:00:00");
+    const targetDate = new Date("2025-07-14T19:00:00");
     if (now >= targetDate) {
       setShowRegisterButton(true);
     }
