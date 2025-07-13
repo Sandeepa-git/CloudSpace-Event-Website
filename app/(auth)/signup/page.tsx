@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
@@ -62,6 +63,8 @@ const universities = [
 const academicYears = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 
 export default function SignUp() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -189,9 +192,7 @@ export default function SignUp() {
         return;
       }
 
-      setSuccessMessage(
-        "Registration successful! You can now go back to home."
-      );
+      setSuccessMessage("Registration successful! Redirecting to WhatsApp group...");
 
       setFormData({
         firstName: "",
@@ -212,6 +213,12 @@ export default function SignUp() {
         year: "",
         whatsapp: "",
       });
+
+      // Redirect after delay
+      setTimeout(() => {
+        window.location.href =
+          "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
+      }, 2000);
     } catch (error: any) {
       alert("An error occurred: " + error.message);
     }
