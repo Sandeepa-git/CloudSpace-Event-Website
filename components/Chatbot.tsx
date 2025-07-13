@@ -160,7 +160,7 @@ export default function GeminiChatbot() {
             <details><summary>Who can attend?</summary><p>All Sri Lankan undergraduates from state and non-state universities.</p></details>
             <details><summary>When does it happen?</summary><p>On July 19, 26  2025.</p></details>
             <details><summary>What tools will we use?</summary><p>AWS, Docker, Kubernetes, GitHub, CI/CD, IAM, Lambda, EC2, and more.</p></details>
-            <details><summary>Where is it hosted?</summary><p>The event is hosted at <strong>SLTC Research University</strong>, located in Padukka.</p> ad</details>
+            <details><summary>Where is it hosted?</summary><p>The event is hosted at <strong>SLTC Research University</strong>, located in Padukka.</p></details>
           </div>
 
           <div ref={containerRef} className="chat-messages">

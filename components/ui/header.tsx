@@ -10,7 +10,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showRegisterButton, setShowRegisterButton] = useState(false);
 
-  // ✅ Call this hook unconditionally
+  // ✅ Set visibility for the Register button
   useEffect(() => {
     const now = new Date();
     const targetDate = new Date("2025-07-14T19:00:00");
@@ -19,10 +19,11 @@ export default function Header() {
     }
   }, []);
 
-  // ✅ Only check condition after hooks
+  // ✅ Determine whether to hide the header on specific routes
   const shouldHideHeader = pathname === "/signup" || pathname === "/auth/signup";
   if (shouldHideHeader) return null;
 
+  // ✅ Handle scroll with animation
   const handleAnimatedScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -33,10 +34,16 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
+  // ✅ Conditionally include "Merchandise" after July 19, 2025
+  const now = new Date();
+  const merchandiseReleaseDate = new Date("2025-07-19T00:00:00");
+
   const navItems = [
     { id: "features", label: "About Us" },
     { id: "workflows", label: "Event Timeline" },
-    { id: "testimonials", label: "Merchandise" },
+    ...(now >= merchandiseReleaseDate
+      ? [{ id: "testimonials", label: "Merchandise" }]
+      : []),
     { id: "cta", label: "Contact Us" },
   ];
 
