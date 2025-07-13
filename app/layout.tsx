@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 
 import Header from "@/components/ui/header";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Google font
 const inter = Inter({
@@ -80,8 +81,9 @@ export default function RootLayout({
           <Header />
           {children}
         </div>
-        {/* ✅ Include Vercel Analytics */}
+        {/* ✅ Include Vercel Analytics & Speed Insights */}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
