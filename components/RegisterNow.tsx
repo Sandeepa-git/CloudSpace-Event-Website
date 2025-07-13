@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function RegisterNow() {
   const [showContent, setShowContent] = useState(false);
+  const [registered, setRegistered] = useState(false); // New state
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -13,7 +14,7 @@ export default function RegisterNow() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2025-07-14T09:00:00");
+    const targetDate = new Date("2025-07-13T09:00:00");
 
     const updateCountdown = () => {
       const now = new Date();
@@ -33,7 +34,7 @@ export default function RegisterNow() {
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    updateCountdown(); // Run immediately
+    updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
@@ -48,25 +49,35 @@ export default function RegisterNow() {
         <div className="rounded-2xl bg-gray-900/70 border border-[rgba(0,195,255,0.1)] p-6 sm:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,195,255,0.3)] backdrop-blur-md animate-float-glow">
           {showContent ? (
             <>
-              {/* Heading */}
               <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
                 Ready to Join the CloudSpace Experience?
               </h2>
 
-              {/* Description */}
               <p className="text-[#D1EAF5]/70 text-base sm:text-lg text-left mb-8">
                 Secure your spot and be a part of our transformative cloud journey.
                 Register now to reserve your seat for all event phases!
               </p>
 
-              {/* Button */}
-              <div className="flex justify-start">
+              <div className="flex flex-col items-start gap-4">
                 <Link
                   href="/signup"
+                  onClick={() => setRegistered(true)} // Track click
                   className="inline-block rounded-full bg-gradient-to-r from-[#00C3FF] to-[#0068FF] px-8 py-3 text-sm sm:text-base font-medium text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
                 >
                   Register Now
                 </Link>
+
+                {/* WhatsApp Group Link */}
+                {registered && (
+                  <a
+                    href="https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#00C3FF] underline text-sm sm:text-base hover:text-[#0095dd]"
+                  >
+                    👉 Join our official WhatsApp group
+                  </a>
+                )}
               </div>
             </>
           ) : (
@@ -75,7 +86,6 @@ export default function RegisterNow() {
                 Registrations Opening Soon
               </p>
 
-              {/* Countdown */}
               <div className="text-center text-[#00C3FF]/80 font-mono text-sm sm:text-base">
                 {`${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}
               </div>
