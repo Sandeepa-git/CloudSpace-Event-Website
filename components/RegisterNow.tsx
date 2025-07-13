@@ -13,7 +13,7 @@ export default function RegisterNow() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2025-07-14T19:00:00");
+    const targetDate = new Date("2025-07-14T09:00:00");
 
     const updateCountdown = () => {
       const now = new Date();
