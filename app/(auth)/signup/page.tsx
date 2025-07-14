@@ -86,25 +86,19 @@ export default function SignUp() {
   });
 
   const [successMessage, setSuccessMessage] = useState<string>("");
-  const [emailExistsError, setEmailExistsError] = useState<string>("");
-
   const [session, setSession] = useState<Session | null>(null);
 
   // Track login status
   useEffect(() => {
     const getSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const { data: { session } } = await supabase.auth.getSession();
       setSession(session);
     };
     getSession();
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-      }
-    );
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
     return () => {
       listener?.subscription.unsubscribe();
@@ -185,20 +179,13 @@ export default function SignUp() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-
-    // Clear errors and email exists error on email change
     setErrors((prev) => ({ ...prev, [name]: "" }));
-    if (name === "email" && emailExistsError) {
-      setEmailExistsError("");
-    }
     setSuccessMessage("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccessMessage("");
-    setEmailExistsError("");
-
     if (!validate()) return;
 
     const universityToSubmit =
@@ -207,47 +194,23 @@ export default function SignUp() {
         : formData.university;
 
     try {
-      // Check if email already exists
-      const { data: existingUsers, error: fetchError } = await supabase
-        .from("Cloudspace Registration")
-        .select("email")
-        .eq("email", formData.email)
-        .limit(1);
+      const { error } = await supabase.from("Cloudspace Registration").insert([
+        {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          university: universityToSubmit,
+          year: formData.year,
+          whatsapp: formData.whatsapp,
+        },
+      ]);
 
-      if (fetchError) {
-        alert("Error checking existing email: " + fetchError.message);
+      if (error) {
+        alert("Failed to save data: " + error.message);
         return;
       }
 
-      if (existingUsers && existingUsers.length > 0) {
-        setEmailExistsError(
-          "This email is already registered. You cannot register again."
-        );
-        return;
-      }
-
-      // Insert new registration
-      const { error: insertError } = await supabase
-        .from("Cloudspace Registration")
-        .insert([
-          {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            university: universityToSubmit,
-            year: formData.year,
-            whatsapp: formData.whatsapp,
-          },
-        ]);
-
-      if (insertError) {
-        alert("Failed to save data: " + insertError.message);
-        return;
-      }
-
-      setSuccessMessage(
-        "Registration successful! Redirecting to WhatsApp group..."
-      );
+      setSuccessMessage("Registration successful! Redirecting to WhatsApp group...");
 
       setFormData({
         firstName: "",
@@ -270,8 +233,7 @@ export default function SignUp() {
       });
 
       setTimeout(() => {
-        window.location.href =
-          "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
+        window.location.href = "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
       }, 2000);
     } catch (error: any) {
       alert("An error occurred: " + error.message);
@@ -330,12 +292,6 @@ export default function SignUp() {
             </div>
           )}
 
-          {emailExistsError && (
-            <div className="mb-4 rounded bg-red-700 p-3 text-center text-white">
-              {emailExistsError}
-            </div>
-          )}
-
           {successMessage && (
             <div className="mb-6 rounded bg-green-700 p-4 text-center text-white">
               {successMessage}
@@ -346,10 +302,7 @@ export default function SignUp() {
             <div className="space-y-5">
               {fields.map(({ label, id, type, autoComplete, placeholder }) => (
                 <div key={id}>
-                  <label
-                    htmlFor={id}
-                    className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
-                  >
+                  <label htmlFor={id} className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
                     {label} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -368,19 +321,14 @@ export default function SignUp() {
                     autoComplete={autoComplete}
                   />
                   {errors[id as keyof FormData] && (
-                    <p className="mt-1 text-xs text-red-500">
-                      {errors[id as keyof FormData]}
-                    </p>
+                    <p className="mt-1 text-xs text-red-500">{errors[id as keyof FormData]}</p>
                   )}
                 </div>
               ))}
 
               {/* University Dropdown */}
               <div>
-                <label
-                  htmlFor="university"
-                  className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
-                >
+                <label htmlFor="university" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
                   University <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -389,9 +337,7 @@ export default function SignUp() {
                   value={formData.university}
                   onChange={handleChange}
                   className={`form-select w-full rounded-lg bg-gray-800 text-white border ${
-                    errors.university
-                      ? "border-red-500"
-                      : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
+                    errors.university ? "border-red-500" : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
                   }`}
                   required
                 >
@@ -403,19 +349,13 @@ export default function SignUp() {
                   ))}
                   <option value="Other">Other</option>
                 </select>
-                {errors.university && (
-                  <p className="mt-1 text-xs text-red-500">{errors.university}</p>
-                )}
+                {errors.university && <p className="mt-1 text-xs text-red-500">{errors.university}</p>}
               </div>
 
               {formData.university === "Other" && (
                 <div>
-                  <label
-                    htmlFor="otherUniversity"
-                    className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
-                  >
-                    Please specify your university{" "}
-                    <span className="text-red-500">*</span>
+                  <label htmlFor="otherUniversity" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
+                    Please specify your university <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="otherUniversity"
@@ -433,19 +373,14 @@ export default function SignUp() {
                     autoComplete="off"
                   />
                   {errors.otherUniversity && (
-                    <p className="mt-1 text-xs text-red-500">
-                      {errors.otherUniversity}
-                    </p>
+                    <p className="mt-1 text-xs text-red-500">{errors.otherUniversity}</p>
                   )}
                 </div>
               )}
 
               {/* Academic Year Dropdown */}
               <div>
-                <label
-                  htmlFor="year"
-                  className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
-                >
+                <label htmlFor="year" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
                   Academic Year <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -454,9 +389,7 @@ export default function SignUp() {
                   value={formData.year}
                   onChange={handleChange}
                   className={`form-select w-full rounded-lg bg-gray-800 text-white border ${
-                    errors.year
-                      ? "border-red-500"
-                      : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
+                    errors.year ? "border-red-500" : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
                   }`}
                   required
                 >
@@ -467,9 +400,7 @@ export default function SignUp() {
                     </option>
                   ))}
                 </select>
-                {errors.year && (
-                  <p className="mt-1 text-xs text-red-500">{errors.year}</p>
-                )}
+                {errors.year && <p className="mt-1 text-xs text-red-500">{errors.year}</p>}
               </div>
             </div>
 
@@ -478,9 +409,7 @@ export default function SignUp() {
                 type="submit"
                 disabled={!session}
                 className={`w-full rounded-lg bg-gradient-to-r from-[#00C3FF] to-[#0068FF] py-2 font-semibold text-white transition ${
-                  !session
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:opacity-90"
+                  !session ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"
                 }`}
               >
                 {session ? "Register" : "Sign in with Google to Register"}
