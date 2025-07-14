@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, Session } from "@supabase/supabase-js";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -86,6 +86,30 @@ export default function SignUp() {
   });
 
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [emailExistsError, setEmailExistsError] = useState<string>("");
+
+  const [session, setSession] = useState<Session | null>(null);
+
+  // Track login status
+  useEffect(() => {
+    const getSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+    };
+    getSession();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, []);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const nameRegex = /^[A-Za-z]+$/;
@@ -161,13 +185,20 @@ export default function SignUp() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear errors and email exists error on email change
     setErrors((prev) => ({ ...prev, [name]: "" }));
+    if (name === "email" && emailExistsError) {
+      setEmailExistsError("");
+    }
     setSuccessMessage("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccessMessage("");
+    setEmailExistsError("");
+
     if (!validate()) return;
 
     const universityToSubmit =
@@ -176,23 +207,47 @@ export default function SignUp() {
         : formData.university;
 
     try {
-      const { error } = await supabase.from("Cloudspace Registration").insert([
-        {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          university: universityToSubmit,
-          year: formData.year,
-          whatsapp: formData.whatsapp,
-        },
-      ]);
+      // Check if email already exists
+      const { data: existingUsers, error: fetchError } = await supabase
+        .from("Cloudspace Registration")
+        .select("email")
+        .eq("email", formData.email)
+        .limit(1);
 
-      if (error) {
-        alert("Failed to save data: " + error.message);
+      if (fetchError) {
+        alert("Error checking existing email: " + fetchError.message);
         return;
       }
 
-      setSuccessMessage("Registration successful! Redirecting to WhatsApp group...");
+      if (existingUsers && existingUsers.length > 0) {
+        setEmailExistsError(
+          "This email is already registered. You cannot register again."
+        );
+        return;
+      }
+
+      // Insert new registration
+      const { error: insertError } = await supabase
+        .from("Cloudspace Registration")
+        .insert([
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            university: universityToSubmit,
+            year: formData.year,
+            whatsapp: formData.whatsapp,
+          },
+        ]);
+
+      if (insertError) {
+        alert("Failed to save data: " + insertError.message);
+        return;
+      }
+
+      setSuccessMessage(
+        "Registration successful! Redirecting to WhatsApp group..."
+      );
 
       setFormData({
         firstName: "",
@@ -214,7 +269,6 @@ export default function SignUp() {
         whatsapp: "",
       });
 
-      // Redirect after delay
       setTimeout(() => {
         window.location.href =
           "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
@@ -251,11 +305,36 @@ export default function SignUp() {
     <section className="bg-[#000000] text-white min-h-screen flex items-center justify-center">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-12 md:py-20">
-          <div className="pb-12 text-center">
+          <div className="pb-8 text-center">
             <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text text-transparent font-nacelle text-3xl font-semibold md:text-4xl">
               Claim Your Seat
             </h1>
           </div>
+
+          {!session && (
+            <div className="mb-6 text-center">
+              <button
+                type="button"
+                onClick={async () => {
+                  await supabase.auth.signInWithOAuth({
+                    provider: "google",
+                    options: {
+                      redirectTo: `${window.location.origin}/signup`,
+                    },
+                  });
+                }}
+                className="rounded-lg bg-white text-black font-semibold px-4 py-2 hover:opacity-90"
+              >
+                Sign in with Google
+              </button>
+            </div>
+          )}
+
+          {emailExistsError && (
+            <div className="mb-4 rounded bg-red-700 p-3 text-center text-white">
+              {emailExistsError}
+            </div>
+          )}
 
           {successMessage && (
             <div className="mb-6 rounded bg-green-700 p-4 text-center text-white">
@@ -263,11 +342,7 @@ export default function SignUp() {
             </div>
           )}
 
-          <form
-            onSubmit={handleSubmit}
-            className="mx-auto max-w-[400px]"
-            noValidate
-          >
+          <form onSubmit={handleSubmit} className="mx-auto max-w-[400px]" noValidate>
             <div className="space-y-5">
               {fields.map(({ label, id, type, autoComplete, placeholder }) => (
                 <div key={id}>
@@ -329,13 +404,10 @@ export default function SignUp() {
                   <option value="Other">Other</option>
                 </select>
                 {errors.university && (
-                  <p className="mt-1 text-xs text-red-500">
-                    {errors.university}
-                  </p>
+                  <p className="mt-1 text-xs text-red-500">{errors.university}</p>
                 )}
               </div>
 
-              {/* Other University Input - show only if "Other" selected */}
               {formData.university === "Other" && (
                 <div>
                   <label
@@ -404,9 +476,14 @@ export default function SignUp() {
             <div className="mt-6 space-y-5">
               <button
                 type="submit"
-                className="w-full rounded-lg bg-gradient-to-r from-[#00C3FF] to-[#0068FF] py-2 font-semibold text-white transition hover:opacity-90"
+                disabled={!session}
+                className={`w-full rounded-lg bg-gradient-to-r from-[#00C3FF] to-[#0068FF] py-2 font-semibold text-white transition ${
+                  !session
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:opacity-90"
+                }`}
               >
-                Register
+                {session ? "Register" : "Sign in with Google to Register"}
               </button>
 
               <div className="text-center">
