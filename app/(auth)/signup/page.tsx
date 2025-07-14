@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient, Session } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -19,6 +19,7 @@ type FormData = {
   otherUniversity: string;
   year: string;
   whatsapp: string;
+  nic: string; // Added NIC field
 };
 
 type Errors = {
@@ -73,6 +74,7 @@ export default function SignUp() {
     otherUniversity: "",
     year: "",
     whatsapp: "",
+    nic: "", // initialize NIC
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -83,31 +85,15 @@ export default function SignUp() {
     otherUniversity: "",
     year: "",
     whatsapp: "",
+    nic: "", // initialize NIC error
   });
 
   const [successMessage, setSuccessMessage] = useState<string>("");
-  const [session, setSession] = useState<Session | null>(null);
-
-  // Track login status
-  useEffect(() => {
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-    };
-    getSession();
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => {
-      listener?.subscription.unsubscribe();
-    };
-  }, []);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const nameRegex = /^[A-Za-z]+$/;
   const phoneRegex = /^\+?\d+$/;
+  const nicRegex = /^[0-9]{9}[vVxX]$|^[0-9]{12}$/; // NIC regex: old (9 digits + letter) or new (12 digits)
 
   const validate = (): boolean => {
     let valid = true;
@@ -119,6 +105,7 @@ export default function SignUp() {
       otherUniversity: "",
       year: "",
       whatsapp: "",
+      nic: "",
     };
 
     if (!formData.firstName.trim()) {
@@ -170,6 +157,14 @@ export default function SignUp() {
       valid = false;
     }
 
+    if (!formData.nic.trim()) {
+      newErrors.nic = "NIC is required";
+      valid = false;
+    } else if (!nicRegex.test(formData.nic)) {
+      newErrors.nic = "NIC must be valid (e.g. 123456789V or 199012345678)";
+      valid = false;
+    }
+
     setErrors(newErrors);
     return valid;
   };
@@ -202,6 +197,7 @@ export default function SignUp() {
           university: universityToSubmit,
           year: formData.year,
           whatsapp: formData.whatsapp,
+          nic: formData.nic, // insert NIC field
         },
       ]);
 
@@ -220,6 +216,7 @@ export default function SignUp() {
         otherUniversity: "",
         year: "",
         whatsapp: "",
+        nic: "", // reset NIC
       });
 
       setErrors({
@@ -230,10 +227,13 @@ export default function SignUp() {
         otherUniversity: "",
         year: "",
         whatsapp: "",
+        nic: "",
       });
 
+      // Redirect after delay
       setTimeout(() => {
-        window.location.href = "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
+        window.location.href =
+          "https://chat.whatsapp.com/Dmr1Y4T1yocCt4MMtozn9H?mode=ac_c";
       }, 2000);
     } catch (error: any) {
       alert("An error occurred: " + error.message);
@@ -267,30 +267,11 @@ export default function SignUp() {
     <section className="bg-[#000000] text-white min-h-screen flex items-center justify-center">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-12 md:py-20">
-          <div className="pb-8 text-center">
+          <div className="pb-12 text-center">
             <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#00C3FF,#0068FF,#00C3FF)] bg-[length:200%_auto] bg-clip-text text-transparent font-nacelle text-3xl font-semibold md:text-4xl">
               Claim Your Seat
             </h1>
           </div>
-
-          {!session && (
-            <div className="mb-6 text-center">
-              <button
-                type="button"
-                onClick={async () => {
-                  await supabase.auth.signInWithOAuth({
-                    provider: "google",
-                    options: {
-                      redirectTo: `${window.location.origin}/signup`,
-                    },
-                  });
-                }}
-                className="rounded-lg bg-white text-black font-semibold px-4 py-2 hover:opacity-90"
-              >
-                Sign in with Google
-              </button>
-            </div>
-          )}
 
           {successMessage && (
             <div className="mb-6 rounded bg-green-700 p-4 text-center text-white">
@@ -298,11 +279,18 @@ export default function SignUp() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="mx-auto max-w-[400px]" noValidate>
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto max-w-[400px]"
+            noValidate
+          >
             <div className="space-y-5">
               {fields.map(({ label, id, type, autoComplete, placeholder }) => (
                 <div key={id}>
-                  <label htmlFor={id} className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
+                  <label
+                    htmlFor={id}
+                    className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
+                  >
                     {label} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -321,14 +309,19 @@ export default function SignUp() {
                     autoComplete={autoComplete}
                   />
                   {errors[id as keyof FormData] && (
-                    <p className="mt-1 text-xs text-red-500">{errors[id as keyof FormData]}</p>
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors[id as keyof FormData]}
+                    </p>
                   )}
                 </div>
               ))}
 
               {/* University Dropdown */}
               <div>
-                <label htmlFor="university" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
+                <label
+                  htmlFor="university"
+                  className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
+                >
                   University <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -337,7 +330,9 @@ export default function SignUp() {
                   value={formData.university}
                   onChange={handleChange}
                   className={`form-select w-full rounded-lg bg-gray-800 text-white border ${
-                    errors.university ? "border-red-500" : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
+                    errors.university
+                      ? "border-red-500"
+                      : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
                   }`}
                   required
                 >
@@ -349,13 +344,22 @@ export default function SignUp() {
                   ))}
                   <option value="Other">Other</option>
                 </select>
-                {errors.university && <p className="mt-1 text-xs text-red-500">{errors.university}</p>}
+                {errors.university && (
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.university}
+                  </p>
+                )}
               </div>
 
+              {/* Other University Input - show only if "Other" selected */}
               {formData.university === "Other" && (
                 <div>
-                  <label htmlFor="otherUniversity" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
-                    Please specify your university <span className="text-red-500">*</span>
+                  <label
+                    htmlFor="otherUniversity"
+                    className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
+                  >
+                    Please specify your university{" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="otherUniversity"
@@ -373,14 +377,19 @@ export default function SignUp() {
                     autoComplete="off"
                   />
                   {errors.otherUniversity && (
-                    <p className="mt-1 text-xs text-red-500">{errors.otherUniversity}</p>
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors.otherUniversity}
+                    </p>
                   )}
                 </div>
               )}
 
               {/* Academic Year Dropdown */}
               <div>
-                <label htmlFor="year" className="mb-1 block text-sm font-medium text-[#00C3FF]/70">
+                <label
+                  htmlFor="year"
+                  className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
+                >
                   Academic Year <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -389,7 +398,9 @@ export default function SignUp() {
                   value={formData.year}
                   onChange={handleChange}
                   className={`form-select w-full rounded-lg bg-gray-800 text-white border ${
-                    errors.year ? "border-red-500" : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
+                    errors.year
+                      ? "border-red-500"
+                      : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
                   }`}
                   required
                 >
@@ -400,19 +411,46 @@ export default function SignUp() {
                     </option>
                   ))}
                 </select>
-                {errors.year && <p className="mt-1 text-xs text-red-500">{errors.year}</p>}
+                {errors.year && (
+                  <p className="mt-1 text-xs text-red-500">{errors.year}</p>
+                )}
+              </div>
+
+              {/* NIC Input */}
+              <div>
+                <label
+                  htmlFor="nic"
+                  className="mb-1 block text-sm font-medium text-[#00C3FF]/70"
+                >
+                  NIC <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="nic"
+                  name="nic"
+                  type="text"
+                  value={formData.nic}
+                  onChange={handleChange}
+                  className={`form-input w-full rounded-lg bg-gray-800 text-white border ${
+                    errors.nic
+                      ? "border-red-500"
+                      : "border-[#00C3FF]/30 focus:border-[#00C3FF]"
+                  }`}
+                  placeholder="e.g. 123456789V or 199012345678"
+                  required
+                  autoComplete="off"
+                />
+                {errors.nic && (
+                  <p className="mt-1 text-xs text-red-500">{errors.nic}</p>
+                )}
               </div>
             </div>
 
             <div className="mt-6 space-y-5">
               <button
                 type="submit"
-                disabled={!session}
-                className={`w-full rounded-lg bg-gradient-to-r from-[#00C3FF] to-[#0068FF] py-2 font-semibold text-white transition ${
-                  !session ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"
-                }`}
+                className="w-full rounded-lg bg-gradient-to-r from-[#00C3FF] to-[#0068FF] py-2 font-semibold text-white transition hover:opacity-90"
               >
-                {session ? "Register" : "Sign in with Google to Register"}
+                Register
               </button>
 
               <div className="text-center">
