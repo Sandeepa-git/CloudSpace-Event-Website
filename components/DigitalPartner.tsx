@@ -11,7 +11,7 @@ export default function SponsorSlider() {
   useEffect(() => {
     // Set date visibility: show only from July 16, 2025
     const now = new Date();
-    const showFrom = new Date("2025-07-16T19:00:00");
+    const showFrom = new Date("2025-07-15T19:00:00");
 
     if (now >= showFrom) {
       setShowSlider(true);

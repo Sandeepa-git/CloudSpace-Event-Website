@@ -14,7 +14,7 @@ export default function SponsorSlider() {
 
   useEffect(() => {
     const now = new Date();
-    const revealTime = new Date("2025-07-15T19:00:00"); // 7 PM local time on July 15, 2025
+    const revealTime = new Date("2025-07-16T19:00:00"); // 7 PM local time on July 15, 2025
     setShowSlider(now >= revealTime);
   }, []);
 
