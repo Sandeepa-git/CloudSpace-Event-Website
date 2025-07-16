@@ -56,7 +56,7 @@ export default function SponsorSlider() {
         <div className="flex items-center justify-center gap-3 mb-6">
           <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
           <h2 className="animate-[gradient_6s_linear_infinite] text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
-            Our Knowledge Partners
+            Our Knowledge Partner
           </h2>
           <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
         </div>

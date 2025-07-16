@@ -3,98 +3,116 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-const TshirtFront = "/images/tshirtfront.png";
-const TshirtBack = "/images/tshirtback.png";
+const TshirtFront = "/images/Shirt.png";
+
+// Helper to calculate time left
+function getTimeLeft(targetDate: Date) {
+  const now = new Date();
+  const diff = targetDate.getTime() - now.getTime();
+
+  if (diff <= 0) return null;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  return { days, hours, minutes, seconds };
+}
 
 export default function MerchandiseSection() {
-  const [showMerchandise, setShowMerchandise] = useState(false);
+  // Target date: July 16, 2025, 19:00 local time (month index 6 for July)
+  const targetDate = new Date(2025, 6, 19, 19, 0, 0);
 
-  useEffect(() => {
-    const now = new Date();
-    const targetDate = new Date("2025-07-19T19:00:00");
-    if (now >= targetDate) {
-      setShowMerchandise(true);
-    }
-  }, []);
+  const [timeLeft, setTimeLeft] = React.useState(getTimeLeft(targetDate));
 
-  // ❌ Hide the entire section before the target date
-  if (!showMerchandise) return null;
+  React.useEffect(() => {
+    if (!timeLeft) return;
 
+    const timerId = setInterval(() => {
+      const newTimeLeft = getTimeLeft(targetDate);
+      setTimeLeft(newTimeLeft);
+
+      if (!newTimeLeft) {
+        clearInterval(timerId);
+      }
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [timeLeft, targetDate]);
+
+  // Show merchandise only after countdown finishes
+  if (!timeLeft) {
+    return (
+      <section>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-[#0068FF]">Merchandise Available Now!</h2>
+          <div className="mx-auto w-full max-w-[300px] animate-glowPulse">
+            <Image
+              className="rounded-md object-contain mx-auto"
+              src={TshirtFront}
+              alt="CloudSpace T-shirt Front"
+              width={300}
+              height={450}
+              priority
+            />
+          </div>
+          <button className="mt-6 rounded-full bg-[#0068FF] px-6 py-3 text-white font-semibold shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
+            Order Now
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  // Countdown display before launch
   return (
     <section>
-      <div id="merchandise" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t py-8 md:py-12">
-          {/* Header */}
-          <div className="mx-auto max-w-xl pb-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
-              <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
-                Merchandise
-              </h2>
-              <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
-            </div>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <h2 className="text-4xl font-bold mb-6 text-[#0068FF]">Merchandise Launching Soon!</h2>
+        <p className="text-lg text-[#ffffff]/80 mb-12">
+          Get ready! Official CloudSpace gear will be available after the countdown.
+        </p>
 
-            <p className="text-sm sm:text-base text-[#00C3FF]/70">
-              Get your official CloudSpace gear and show off your passion for cloud tech.
-            </p>
+        <div className="flex justify-center gap-8 text-[#0068FF] font-mono text-3xl">
+          <div>
+            <div className="text-6xl font-bold">{timeLeft.days}</div>
+            <div className="text-sm uppercase mt-1">Days</div>
           </div>
-
-          <div className="mx-auto grid gap-4 sm:grid-cols-2">
-            {/* Front */}
-            <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
-              <div className="w-full max-w-[220px]">
-                <Image
-                  className="rounded-md object-contain"
-                  src={TshirtFront}
-                  alt="CloudSpace T-shirt Front"
-                  width={220}
-                  height={367}
-                  priority
-                />
-              </div>
-              <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Front)</h3>
-            </article>
-
-            {/* Back */}
-            <article className="group relative flex flex-col items-center text-center rounded-xl bg-gray-900/50 p-3 backdrop-blur-xs transition hover:shadow-lg">
-              <div className="w-full max-w-[220px]">
-                <Image
-                  className="rounded-md object-contain"
-                  src={TshirtBack}
-                  alt="CloudSpace T-shirt Back"
-                  width={220}
-                  height={367}
-                  priority
-                />
-              </div>
-              <h3 className="mt-3 text-sm font-semibold text-gray-100">T-shirt (Back)</h3>
-            </article>
+          <div>
+            <div className="text-6xl font-bold">{String(timeLeft.hours).padStart(2, "0")}</div>
+            <div className="text-sm uppercase mt-1">Hours</div>
           </div>
-
-          <div className="mt-6 text-center">
-            <button className="rounded-full bg-[#0068FF] px-4 py-2 text-sm text-white font-medium shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
-              Order Now
-            </button>
+          <div>
+            <div className="text-6xl font-bold">{String(timeLeft.minutes).padStart(2, "0")}</div>
+            <div className="text-sm uppercase mt-1">Minutes</div>
+          </div>
+          <div>
+            <div className="text-6xl font-bold">{String(timeLeft.seconds).padStart(2, "0")}</div>
+            <div className="text-sm uppercase mt-1">Seconds</div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes floatGlowSubtle {
+        @keyframes glowPulse {
           0%, 100% {
-            transform: translateY(0) scale(1);
-            box-shadow: 0 0 4px rgba(0, 195, 255, 0.12);
-            filter: drop-shadow(0 0 3px rgba(0, 195, 255, 0.12));
-          }
-          50% {
-            transform: translateY(-4px) scale(1.01);
             box-shadow: 0 0 8px rgba(0, 195, 255, 0.2);
             filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.2));
           }
+          55% {
+            box-shadow: 0 0 16px rgba(0, 195, 255, 0.4);
+            filter: drop-shadow(0 0 12px rgba(0, 195, 255, 0.4));
+          }
         }
 
-        .animate-merch-glow {
-          animation: floatGlowSubtle 3s ease-in-out infinite;
+        .animate-glowPulse {
+          animation: glowPulse 6s ease-in-out infinite;
+          border-radius: 0.375rem;
+          position: relative;
+          background-color: #111827; /* Dark background for better glow visibility */
+          padding: 0.25rem;
+          display: inline-block;
         }
       `}</style>
     </section>
