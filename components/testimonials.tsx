@@ -5,93 +5,49 @@ import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
 
-// Helper to calculate time left
-function getTimeLeft(targetDate: Date) {
-  const now = new Date();
-  const diff = targetDate.getTime() - now.getTime();
-
-  if (diff <= 0) return null;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  return { days, hours, minutes, seconds };
-}
+// July 16, 2025 at 7:00 PM (local time)
+const launchTime = new Date(2025, 6, 19, 19, 0, 0);
 
 export default function MerchandiseSection() {
-  // Target date: July 16, 2025, 19:00 local time (month index 6 for July)
-  const targetDate = new Date(2025, 6, 19, 19, 0, 0);
+  const [isLive, setIsLive] = useState<boolean>(false);
 
-  const [timeLeft, setTimeLeft] = React.useState(getTimeLeft(targetDate));
-
-  React.useEffect(() => {
-    if (!timeLeft) return;
-
-    const timerId = setInterval(() => {
-      const newTimeLeft = getTimeLeft(targetDate);
-      setTimeLeft(newTimeLeft);
-
-      if (!newTimeLeft) {
-        clearInterval(timerId);
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      if (now >= launchTime) {
+        setIsLive(true);
       }
-    }, 1000);
+    };
 
-    return () => clearInterval(timerId);
-  }, [timeLeft, targetDate]);
+    checkTime(); // check immediately
 
-  // Show merchandise only after countdown finishes
-  if (!timeLeft) {
-    return (
-      <section>
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h2 className="text-4xl font-bold mb-4 text-[#0068FF]">Merchandise Available Now!</h2>
-          <div className="mx-auto w-full max-w-[300px] animate-glowPulse">
-            <Image
-              className="rounded-md object-contain mx-auto"
-              src={TshirtFront}
-              alt="CloudSpace T-shirt Front"
-              width={300}
-              height={450}
-              priority
-            />
-          </div>
-          <button className="mt-6 rounded-full bg-[#0068FF] px-6 py-3 text-white font-semibold shadow-md hover:bg-[#009FDF] transition duration-300 ease-in-out">
-            Order Now
-          </button>
-        </div>
-      </section>
-    );
-  }
+    const timer = setInterval(checkTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  // Countdown display before launch
+  if (!isLive) return null;
+
   return (
-    <section>
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-[#0068FF]">Merchandise Launching Soon!</h2>
-        <p className="text-lg text-[#ffffff]/80 mb-12">
-          Get ready! Official CloudSpace gear will be available after the countdown.
-        </p>
+    <section className="bg-black text-white py-16 px-4">
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#0068FF]">
+          Merchandise Available Now!
+        </h2>
 
-        <div className="flex justify-center gap-8 text-[#0068FF] font-mono text-3xl">
-          <div>
-            <div className="text-6xl font-bold">{timeLeft.days}</div>
-            <div className="text-sm uppercase mt-1">Days</div>
-          </div>
-          <div>
-            <div className="text-6xl font-bold">{String(timeLeft.hours).padStart(2, "0")}</div>
-            <div className="text-sm uppercase mt-1">Hours</div>
-          </div>
-          <div>
-            <div className="text-6xl font-bold">{String(timeLeft.minutes).padStart(2, "0")}</div>
-            <div className="text-sm uppercase mt-1">Minutes</div>
-          </div>
-          <div>
-            <div className="text-6xl font-bold">{String(timeLeft.seconds).padStart(2, "0")}</div>
-            <div className="text-sm uppercase mt-1">Seconds</div>
-          </div>
+        <div className="w-full max-w-[300px] animate-glowPulse mb-6">
+          <Image
+            src={TshirtFront}
+            alt="CloudSpace T-shirt Front"
+            width={300}
+            height={450}
+            className="rounded-md object-contain w-full h-auto"
+            priority
+          />
         </div>
+
+        <button className="px-6 py-3 rounded-full bg-[#0068FF] text-white font-semibold shadow-md hover:bg-[#009FDF] transition duration-300">
+          Order Now
+        </button>
       </div>
 
       <style jsx>{`
@@ -108,10 +64,9 @@ export default function MerchandiseSection() {
 
         .animate-glowPulse {
           animation: glowPulse 6s ease-in-out infinite;
-          border-radius: 0.375rem;
-          position: relative;
-          background-color: #111827; /* Dark background for better glow visibility */
+          background-color: #111827;
           padding: 0.25rem;
+          border-radius: 0.5rem;
           display: inline-block;
         }
       `}</style>
