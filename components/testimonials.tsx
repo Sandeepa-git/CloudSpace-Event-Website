@@ -6,7 +6,7 @@ import Image from "next/image";
 const TshirtFront = "/images/Shirt.png";
 
 // July 16, 2025 at 7:00 PM (local time)
-const launchTime = new Date(2025, 6, 19, 19, 0, 0);
+const launchTime = new Date(2025, 6, 19, 10, 0, 0);
 
 export default function MerchandiseSection() {
   const [isLive, setIsLive] = useState<boolean>(false);
