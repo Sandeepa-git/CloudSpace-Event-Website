@@ -45,13 +45,18 @@ export default function MerchandiseSection() {
   if (!isClient) return null;
 
   return (
-    <section className="bg-black text-white py-16 px-4">
+    <section id="testimonials" className="bg-black text-white py-16 px-4">
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         {!isLive && timeLeft ? (
           <>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[#0068FF]">
+            <a
+              href="https://forms.gle/SU6sUYjCqR1XzAWv5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text inline-block mb-2"
+            >
               Merchandise Dropping Soon!
-            </h2>
+            </a>
             <p className="text-xl sm:text-2xl font-medium mb-8 text-gray-300">
               Launching in
             </p>
@@ -76,9 +81,14 @@ export default function MerchandiseSection() {
           </>
         ) : (
           <>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#0068FF]">
+            <a
+              href="https://forms.gle/SU6sUYjCqR1XzAWv5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text inline-block mb-6"
+            >
               Merchandise Available Now!
-            </h2>
+            </a>
 
             <div className="w-full max-w-[300px] mb-6 animate-glowEdge">
               <Image
@@ -119,7 +129,7 @@ export default function MerchandiseSection() {
         }
 
         .animate-glowEdge {
-          animation: glowEdge 4s ease-in-out infinite;
+          animation: glowEdge 5s ease-in-out infinite;
         }
       `}</style>
     </section>
