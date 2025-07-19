@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
-const launchTime = new Date(2025, 6, 20, 10, 0, 0); // July 19, 2025 10:00 AM
+const launchTime = new Date(2025, 6, 19, 10, 0, 0); // July 19, 2025 10:00 AM
 
 export default function MerchandiseSection() {
   const [isClient, setIsClient] = useState(false);
