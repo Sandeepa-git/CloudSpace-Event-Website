@@ -21,7 +21,7 @@ export default function EventStats() {
               <h2 className="animate-[gradient_9s_linear_infinite] text-3xl sm:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
                 Participation Stats
               </h2>
-              <p className="text-[#E0F7FF]/70 text-sm sm:text-base mt-2">
+              <p className="text-[#E0F7FF]/90 text-base sm:text-lg font-semibold mt-3">
                 Phase 01 Completed
               </p>
             </div>
