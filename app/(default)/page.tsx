@@ -15,6 +15,8 @@ import RegisterNow from "@/components/RegisterNow";
 import Preloader from "@/components/Preloader";
 import SponsorSlider from "@/components/SponsorSlider";
 import DigitalPartner from "@/components/DigitalPartner";
+import EventStats from "@/components/EventStats";
+
 
 export default function Home() {
   return (
@@ -22,6 +24,7 @@ export default function Home() {
       <Preloader />
       <PageIllustration />
       <Hero />
+      <EventStats />
       <Features />
       <RegisterNow />
       <Workflows />
