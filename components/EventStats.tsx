@@ -36,7 +36,7 @@ export default function EventStats() {
         >
           {/* Left: Stats */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-6 text-center md:text-left">
-            <div className="bg-[#1E2A38] rounded-2xl p-6 sm:p-8 shadow-md border border-[#00C3FF30] hover:scale-105 transition-transform duration-300">
+            <div className="border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#E0F7FF]">
                 Total Registrants
               </h3>
@@ -44,7 +44,7 @@ export default function EventStats() {
                 {inView ? <CountUp end={366} duration={5} /> : 0}
               </p>
             </div>
-            <div className="bg-[#1E2A38] rounded-2xl p-6 sm:p-8 shadow-md border border-[#00C3FF30] hover:scale-105 transition-transform duration-300">
+            <div className="border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#E0F7FF]">
                 Phase 01 Participants
               </h3>
