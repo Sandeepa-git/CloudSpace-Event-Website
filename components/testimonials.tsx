@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
-const launchTime = new Date(2025, 6, 19, 10, 0, 0); // July 19, 2025 10:00 AM
+const launchTime = new Date(2025, 6, 20, 10, 0, 0); // July 19, 2025 10:00 AM
 
 export default function MerchandiseSection() {
   const [isClient, setIsClient] = useState(false);
@@ -117,12 +117,12 @@ export default function MerchandiseSection() {
         @keyframes glowEdge {
           0%,
           100% {
-            filter: drop-shadow(0 0 2px rgba(0, 195, 255, 0.5))
+            filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.5))
               drop-shadow(0 0 4px rgba(0, 195, 255, 0.4))
               drop-shadow(0 0 6px rgba(0, 195, 255, 0.3));
           }
           50% {
-            filter: drop-shadow(0 0 4px rgba(0, 195, 255, 0.5))
+            filter: drop-shadow(0 0 10px rgba(0, 195, 255, 0.5))
               drop-shadow(0 0 8px rgba(0, 195, 255, 0.4))
               drop-shadow(0 0 10px rgba(0, 195, 255, 0.3));
           }
