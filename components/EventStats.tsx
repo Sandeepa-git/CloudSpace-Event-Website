@@ -36,19 +36,22 @@ export default function EventStats() {
         >
           {/* Left: Stats */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-6 text-center md:text-left">
-            <div className="border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
+            {/* Card 1 */}
+            <div className="group border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#E0F7FF]">
                 Total Registrants
               </h3>
-              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF]">
+              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] group-hover:text-[#0068FF] transition-colors duration-300">
                 {inView ? <CountUp end={366} duration={5} /> : 0}
               </p>
             </div>
-            <div className="border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
+
+            {/* Card 2 */}
+            <div className="group border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#E0F7FF]">
                 Phase 01 Participants
               </h3>
-              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF]">
+              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] group-hover:text-[#0068D1] transition-colors duration-300">
                 {inView ? <CountUp end={117} duration={5} /> : 0}
               </p>
             </div>
@@ -62,7 +65,9 @@ export default function EventStats() {
                 alt="Phase 01 Participants"
                 width={600}
                 height={400}
-                className="rounded-xl shadow-xl border border-[#00C3FF30] object-cover w-full h-auto md:h-[370px]"
+                className={`rounded-xl shadow-xl border border-[#00C3FF30] object-cover w-full h-auto md:h-[370px] transition-all duration-6000 ${
+                  inView ? "grayscale-0" : "grayscale"
+                }`}
                 priority
               />
             </div>
