@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
@@ -8,19 +8,6 @@ import StudentsImage from "@/public/images/Phase 01.jpg";
 
 export default function EventStats() {
   const { ref, inView } = useInView({ triggerOnce: true });
-  const [showImage, setShowImage] = useState(true);
-
-  useEffect(() => {
-    const lastShown = localStorage.getItem("imageLastShown");
-    const now = new Date().getTime();
-
-    if (lastShown && now - parseInt(lastShown) < 24 * 60 * 60 * 1000) {
-      setShowImage(false);
-    } else {
-      localStorage.setItem("imageLastShown", now.toString());
-      setShowImage(true);
-    }
-  }, []);
 
   return (
     <section className="relative bg-black py-16 sm:py-20 px-4 sm:px-6 lg:px-12">
@@ -65,23 +52,21 @@ export default function EventStats() {
             </div>
           </div>
 
-          {/* Right: Image */}
-          {showImage && (
-            <div className="w-full md:w-1/2 flex justify-center items-center">
-              <div className="w-full max-w-[500px]">
-                <Image
-                  src={StudentsImage}
-                  alt="Phase 01 Participants"
-                  width={600}
-                  height={400}
-                  className={`rounded-xl shadow-xl border border-[#00C3FF30] object-cover w-full h-auto md:h-[370px] transition-all duration-6000 ${
-                    inView ? "grayscale-0" : "grayscale"
-                  }`}
-                  priority
-                />
-              </div>
+          {/* Right: Image - always visible */}
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="w-full max-w-[500px]">
+              <Image
+                src={StudentsImage}
+                alt="Phase 01 Participants"
+                width={600}
+                height={400}
+                className={`rounded-xl shadow-xl border border-[#00C3FF30] object-cover w-full h-auto md:h-[370px] transition-all duration-10000 ${
+                  inView ? "grayscale-0" : "grayscale"
+                }`}
+                priority
+              />
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>
