@@ -11,14 +11,14 @@ type TimeLeft = {
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center min-w-[70px] sm:min-w-[90px] bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm rounded-md px-4 py-3 shadow-md mx-2">
+    <div className="flex flex-col items-center min-w-[60px] sm:min-w-[90px] bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm rounded-md px-3 py-2 sm:px-4 sm:py-3 shadow-md mx-1 sm:mx-2">
       <span
-        className="text-3xl sm:text-4xl font-extrabold text-[#E0F7FF]"
+        className="text-2xl sm:text-4xl font-extrabold text-[#E0F7FF]"
         style={{ textShadow: "0 0 6px #00C3FF, 0 0 10px #0068FF" }}
       >
         {value.toString().padStart(2, "0")}
       </span>
-      <span className="mt-1 text-sm sm:text-base text-[#AEE8FF] uppercase tracking-wide">
+      <span className="mt-1 text-xs sm:text-base text-[#AEE8FF] uppercase tracking-wide">
         {label}
       </span>
     </div>
@@ -106,7 +106,8 @@ export default function CountdownTimer() {
             {activePhase === 1 ? "Preparing next stage..." : "Preparing next stage..."}
           </h2>
 
-          <div className="flex gap-3 sm:gap-6 overflow-x-auto no-scrollbar whitespace-nowrap justify-center">
+          {/* Countdown units in one line with horizontal scroll on small screens */}
+          <div className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar">
             <CountdownUnit value={timeLeft.days} label="Days" />
             <CountdownUnit value={timeLeft.hours} label="Hours" />
             <CountdownUnit value={timeLeft.minutes} label="Minutes" />
