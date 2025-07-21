@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
-const launchTime = new Date(2025, 6, 19, 10, 0, 0); // July 19, 2025 10:00 AM
+const launchTime = new Date(2025, 6, 19, 10, 0, 0);
 
 export default function MerchandiseSection() {
   const [isClient, setIsClient] = useState(false);
@@ -90,16 +90,30 @@ export default function MerchandiseSection() {
               Merchandise Available Now!
             </a>
 
-            <div className="w-full max-w-[300px] mb-6 animate-glowEdge">
-              <Image
-                src={TshirtFront}
-                alt="CloudSpace T-shirt Front"
-                width={300}
-                height={450}
-                className="rounded-md object-contain w-full h-auto"
-                priority
-              />
+            <div className="relative group mb-4 w-full max-w-[320px] mx-auto">
+              {/* Softer glowing ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00C3FF]/30 via-[#0068FF]/20 to-[#00C3FF]/30 blur-2xl animate-pulse scale-[1.15] z-0"></div>
+
+              {/* Floating + slow rotating shirt */}
+              <div className="relative z-10 rounded-xl overflow-hidden cursor-pointer transform transition-transform duration-700 hover:scale-105 animate-float-rotate-soft">
+                <Image
+                  src={TshirtFront}
+                  alt="CloudSpace T-shirt Front"
+                  width={320}
+                  height={480}
+                  className="object-contain w-full h-auto rounded-xl relative z-20"
+                  priority
+                />
+
+                {/* Subtle shiny gradient overlay */}
+                <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 animate-shiny-gradient-soft mix-blend-screen z-30" />
+              </div>
             </div>
+
+            {/* Tagline below the image */}
+            <p className="text-white text-lg sm:text-xl font-semibold mb-8 max-w-xl leading-snug">
+              Suit up, show up and stand out in CloudSpace flex. Grab yours now!
+            </p>
 
             <a
               href="https://forms.gle/SU6sUYjCqR1XzAWv5"
@@ -114,22 +128,36 @@ export default function MerchandiseSection() {
       </div>
 
       <style jsx>{`
-        @keyframes glowEdge {
-          0%,
-          100% {
-            filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.5))
-              drop-shadow(0 0 4px rgba(0, 195, 255, 0.4))
-              drop-shadow(0 0 6px rgba(0, 195, 255, 0.3));
+        @keyframes floatRotateSoft {
+          0% {
+            transform: translateY(0) rotateY(0deg);
           }
           50% {
-            filter: drop-shadow(0 0 10px rgba(0, 195, 255, 0.5))
-              drop-shadow(0 0 8px rgba(0, 195, 255, 0.4))
-              drop-shadow(0 0 10px rgba(0, 195, 255, 0.3));
+            transform: translateY(-8px) rotateY(8deg);
+          }
+          100% {
+            transform: translateY(0) rotateY(0deg);
           }
         }
 
-        .animate-glowEdge {
-          animation: glowEdge 5s ease-in-out infinite;
+        @keyframes shinyGradientSoft {
+          0% {
+            background-position: -150% 0;
+          }
+          100% {
+            background-position: 150% 0;
+          }
+        }
+
+        .animate-float-rotate-soft {
+          animation: floatRotateSoft 8s ease-in-out infinite;
+          transform-style: preserve-3d;
+          backface-visibility: hidden;
+        }
+
+        .animate-shiny-gradient-soft {
+          background-size: 150% 100%;
+          animation: shinyGradientSoft 5s linear infinite;
         }
       `}</style>
     </section>

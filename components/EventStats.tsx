@@ -49,43 +49,46 @@ export default function EventStats() {
           </div>
         </div>
 
-        {/* Images side-by-side */}
-        <div
-          ref={ref}
-          className="flex justify-center gap-8 flex-wrap"
-        >
-          {showFirstImage && (
-            <div
-              className={`max-w-[500px] rounded-xl shadow-xl border border-[#00C3FF30] overflow-hidden transition-opacity duration-1000 ${
-                showFirstImage ? "opacity-100" : "opacity-0"
-              }`}
-            >
+        {/* Images side-by-side with grayscale transition */}
+        <div ref={ref} className="flex flex-wrap sm:flex-nowrap justify-center gap-8">
+          {/* First Image */}
+          <div
+            className={`w-full sm:w-1/2 max-w-[500px] rounded-xl shadow-xl border border-[#00C3FF30] overflow-hidden transition-opacity duration-1000 ${
+              showFirstImage ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {showFirstImage && (
               <Image
                 src="/images/Phase 01.jpg"
                 alt="Phase 01 Participants"
                 width={600}
                 height={400}
-                className="object-cover w-full h-auto"
+                className={`object-cover w-full h-auto transition-all duration-1000 ${
+                  showFirstImage ? "grayscale-0" : "grayscale"
+                }`}
                 priority
               />
-            </div>
-          )}
+            )}
+          </div>
 
-          {showSecondImage && (
-            <div
-              className={`max-w-[500px] rounded-xl shadow-xl border border-[#00C3FF30] overflow-hidden transition-opacity duration-1000 ${
-                showSecondImage ? "opacity-100" : "opacity-0"
-              }`}
-            >
+          {/* Second Image */}
+          <div
+            className={`w-full sm:w-1/2 max-w-[500px] rounded-xl shadow-xl border border-[#00C3FF30] overflow-hidden transition-opacity duration-1000 ${
+              showSecondImage ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {showSecondImage && (
               <Image
                 src="/images/Phase 01 All.jpg"
                 alt="Phase 01 Group Photo"
                 width={600}
                 height={400}
-                className="object-cover w-full h-auto"
+                className={`object-cover w-full h-auto transition-all duration-9000 ${
+                  showSecondImage ? "grayscale-0" : "grayscale"
+                }`}
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </section>
