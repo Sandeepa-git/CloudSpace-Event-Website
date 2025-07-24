@@ -27,10 +27,10 @@ export default function EventStats() {
             <span className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
             <div className="flex flex-col items-center text-center">
               <h2 className="text-3xl sm:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text animate-[gradient_9s_linear_infinite]">
-                Participation Stats
+                Phase 01 Completed
               </h2>
               <p className="mt-3 text-[#E0F7FF]/90 text-base sm:text-lg font-semibold">
-                Phase 01 Completed
+
               </p>
             </div>
             <span className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
@@ -41,7 +41,7 @@ export default function EventStats() {
         <div className="w-full flex flex-col justify-center gap-6 text-center mb-10">
           <div className="group border border-[#00C3FF30] rounded-2xl p-6 sm:p-8 shadow-md hover:scale-105 transition-transform duration-300 mx-auto max-w-md">
             <h3 className="mb-2 text-lg sm:text-xl font-semibold text-[#E0F7FF]">
-              Phase 01 Participants
+              Total Participants
             </h3>
             <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] group-hover:text-[#0068D1] transition-colors duration-300">
               {inView ? <CountUp end={153} duration={5} /> : 0}
