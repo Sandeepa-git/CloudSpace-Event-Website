@@ -21,7 +21,7 @@ const feedbacks: Feedback[] = [
   },
   {
     name: "Isuri Fernando",
-    comment: "Phase 2 was packed with real-world skills. Now I feel confident with CI/CD and cloud tools.",
+    comment: "Phase 1 was packed with real-world skills. Now I feel confident with CI/CD and cloud tools.",
     rating: 5,
   },
 ];
