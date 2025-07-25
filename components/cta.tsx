@@ -42,8 +42,7 @@ const teamMembers = [
     email: "Nadilx007@gmail.com",
     contact: "076 724 0074",
     social: {
-      linkedin:
-        "https://www.linkedin.com/in/nadil-kularathne-a31497307?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      linkedin: "https://www.linkedin.com/in/nadil-kularathne-a31497307",
     },
   },
   {
@@ -63,16 +62,15 @@ const teamMembers = [
     email: "agsvwimalasiri@gmail.com",
     contact: "0750997715",
     social: {
-      linkedin:
-        "https://www.linkedin.com/in/sandeepa-vimukthi-wimalasiri-92ab0a277/",
+      linkedin: "https://www.linkedin.com/in/sandeepa-vimukthi-wimalasiri-92ab0a277/",
     },
   },
 ];
 
 export default function Cta() {
   return (
-    <section id="cta" className="relative overflow-hidden pb-20">
-      {/* Background Blurred Shape */}
+    <section id="cta" className="relative overflow-hidden pb-20 bg-[#0A0F1C]">
+      {/* Blurred Background Shape */}
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -mb-24 ml-20 -translate-x-1/2"
         aria-hidden="true"
@@ -87,86 +85,77 @@ export default function Cta() {
         />
       </div>
 
-      {/* Main Section */}
+      {/* Section Container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-10 sm:py-12 md:py-20 rounded-lg">
-          <div className="mx-auto max-w-3xl text-center">
-            {/* 🔷 Gradient Header Line */}
+        <div className="bg-gradient-to-r from-transparent via-[#1A243B]/60 to-transparent py-12 md:py-20 rounded-xl shadow-xl backdrop-blur-lg">
+          <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
-              <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text text-transparent animate-[gradient_6s_linear_infinite]">
                 Meet Our Organizing Team
               </h2>
-              <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
             </div>
+            <p className="text-[#AEE8FF] text-sm sm:text-base">
+              Passionate leaders driving the success of CloudSpace V1.0
+            </p>
+          </div>
 
-            {/* Team Cards */}
-            <div
-              className="grid gap-8 sm:grid-cols-2 md:grid-cols-3"
-              role="list"
-            >
-              {teamMembers.map(({ name, role, imgSrc, social, email, contact }) => (
-                <article
-                  key={name}
-                  className="rounded-xl bg-gray-900 p-6 text-center shadow-lg transition-transform hover:scale-[1.03]"
-                  data-aos="fade-up"
-                  role="listitem"
-                >
-                  <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-2 border-[#00C3FF]">
-                    <Image
-                      src={imgSrc}
-                      alt={name}
-                      width={112}
-                      height={112}
-                      className={`object-cover transition-transform duration-300 ${
-                        imgSrc === "/images/Ravishka.jpg" ? "scale-130" : ""
-                      }`}
-                      priority
-                    />
-                  </div>
-                  <h3 className="text-md font-semibold text-white truncate">{name}</h3>
-                  <p className="mb-2 text-blue-300">{role}</p>
+          {/* Team Cards */}
+          <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 px-6">
+            {teamMembers.map(({ name, role, imgSrc, email, contact, social }) => (
+              <article
+                key={name}
+                className="rounded-xl bg-[#121A2F] border border-[#00C3FF30] shadow-md p-6 text-center hover:shadow-xl transition-transform hover:scale-105"
+              >
+                <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-2 border-[#00C3FF] shadow-md">
+                  <Image
+                    src={imgSrc}
+                    alt={name}
+                    width={112}
+                    height={112}
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-[#E0F7FF]">{name}</h3>
+                <p className="text-sm text-[#AEE8FF] mb-4">{role}</p>
 
-                  {/* Contact Icons */}
-                  <div className="mt-4 flex justify-center gap-6 text-[#00C3FF]">
-                    {social.linkedin && (
-                      <a
-                        href={social.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="LinkedIn"
-                        className="hover:text-[#0068FF] transition-colors"
-                      >
-                        <FaLinkedinIn size={20} />
-                      </a>
-                    )}
-                    {email && (
-                      <a
-                        href={`mailto:${email}`}
-                        aria-label="Email"
-                        className="hover:text-[#0068FF] transition-colors"
-                      >
-                        <FaEnvelope size={20} />
-                      </a>
-                    )}
-                    {contact && (
-                      <a
-                        href={`tel:${contact.replace(/\s+/g, "")}`}
-                        aria-label="Phone"
-                        className="hover:text-[#0068FF] transition-colors"
-                      >
-                        <FaPhone size={20} />
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
+                <div className="flex justify-center gap-6 text-[#00C3FF]">
+                  {social.linkedin && (
+                    <a
+                      href={social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#0068FF] transition"
+                    >
+                      <FaLinkedinIn size={18} />
+                    </a>
+                  )}
+                  {email && (
+                    <a
+                      href={`mailto:${email}`}
+                      className="hover:text-[#0068FF] transition"
+                    >
+                      <FaEnvelope size={18} />
+                    </a>
+                  )}
+                  {contact && (
+                    <a
+                      href={`tel:${contact.replace(/\s+/g, "")}`}
+                      className="hover:text-[#0068FF] transition"
+                    >
+                      <FaPhone size={18} />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* 🔷 Gradient Animation */}
+      {/* Gradient Keyframes */}
       <style jsx>{`
         @keyframes gradient {
           0%,
@@ -177,7 +166,8 @@ export default function Cta() {
             background-position: 100% 50%;
           }
         }
-        .animate-gradient {
+        .animate-[gradient_6s_linear_infinite] {
+          background-size: 200% auto;
           animation: gradient 6s linear infinite;
         }
       `}</style>

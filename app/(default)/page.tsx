@@ -16,6 +16,8 @@ import Preloader from "@/components/Preloader";
 import SponsorSlider from "@/components/SponsorSlider";
 import DigitalPartner from "@/components/DigitalPartner";
 import EventStats from "@/components/EventStats";
+import Comments from "@/components/comments"; // ✅ add this import
+
 
 
 export default function Home() {
@@ -25,6 +27,7 @@ export default function Home() {
       <PageIllustration />
       <Hero />
       <EventStats />
+      <Comments />
       <Features />
       <RegisterNow />
       <Workflows />

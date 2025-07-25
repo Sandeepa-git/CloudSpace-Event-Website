@@ -32,9 +32,9 @@ export default function Workflows() {
             },
             {
               img: WorflowImgCombined,
-              title: "Phase 2 – Cloud Infrastructure, DevOps & Security",
+              title: "Phase 2 – Architecting, DevOps, ML & Security",
               date: "July 26, 2025",
-              desc: `Take your cloud knowledge to the next level with hands-on experience in real-world tools and frameworks. This phase focuses on building secure, scalable infrastructure and adopting modern DevOps practices using AWS. Explore essential AWS services such as S3 (storage), EC2 (compute), Lambda (serverless), and Fargate (container orchestration). Develop practical skills with DevOps tools like Docker, Kubernetes, and AWS CodePipeline to optimize development and deployment workflows. Apply the AWS Well-Architected Framework to design solutions that balance cost-efficiency, performance, reliability, and security. Additionally, utilize CloudWatch for real-time monitoring, logging, and operational insights. Whether you’re a developer, aspiring cloud architect, or tech enthusiast, this phase equips you with the critical skills to build and manage secure, cloud-native applications effectively.`,
+              desc: `Focuses on building a robust and scalable foundation for the application. It begins with designing the system architecture, selecting appropriate technologies, and defining service boundaries. DevOps practices are introduced to automate development workflows using CI/CD pipelines, Docker, Kubernetes, and infrastructure-as-code tools. If machine learning is involved, this phase includes data preparation, model training, evaluation, and deployment through real-time APIs or batch systems. Security is also prioritized, implementing best practices like authentication, API protection, vulnerability scanning, and threat modeling to ensure the system is resilient, efficient, and secure from end to end.`,
             },
           ].map((item, idx) => (
             <div
