@@ -76,18 +76,6 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop Register Button */}
-          <div className="hidden md:flex flex-1 items-center justify-end gap-3">
-            {showRegisterButton && (
-              <Link
-                href="/signup"
-                className="btn-sm bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-[5px] px-4 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.16)] hover:bg-[length:100%_150%] rounded transition-all duration-200 tracking-wide uppercase text-base text-center"
-              >
-                Register Now
-              </Link>
-            )}
-          </div>
-
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,16 +115,7 @@ export default function Header() {
                 </li>
               ))}
 
-              <li>
-                {showRegisterButton && (
-                  <Link
-                    href="/signup"
-                    className="btn-sm mx-auto bg-gradient-to-t from-[#00C3FF] to-[#0068FF] py-2 px-6 text-white rounded shadow transition hover:scale-105 tracking-wide uppercase text-base inline-block"
-                  >
-                    Register Now
-                  </Link>
-                )}
-              </li>
+              
             </ul>
           </nav>
         )}

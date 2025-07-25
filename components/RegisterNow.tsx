@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function RegisterNow() {
-  const [showContent, setShowContent] = useState(false);
+  const [status, setStatus] = useState<"countdown" | "open" | "closed">("countdown");
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -13,54 +13,61 @@ export default function RegisterNow() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2025-07-14T19:00:00");
+    const openDate = new Date("2025-07-14T19:00:00");
+    const closeDate = new Date("2025-07-21T19:00:00");
 
     const updateCountdown = () => {
       const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
 
-      if (diff <= 0) {
-        setShowContent(true);
-        return;
+      if (now < openDate) {
+        const diff = openDate.getTime() - now.getTime();
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (60 * 60 * 24));
+        const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        setTimeLeft({ days, hours, minutes, seconds });
+        setStatus("countdown");
+      } else if (now >= openDate && now <= closeDate) {
+        setStatus("open");
+      } else {
+        setStatus("closed");
       }
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / (60 * 60 * 24));
-      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    updateCountdown(); // Run immediately
+    updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
-
     return () => clearInterval(interval);
   }, []);
+
+  const getHeadingClass = () => {
+    switch (status) {
+      case "countdown":
+        return "bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF]";
+      case "open":
+        return "bg-gradient-to-r from-[#00F2FF] via-[#0096FF] to-[#00F2FF]";
+      case "closed":
+        return "bg-gradient-to-r from-[#7DD3FC] via-[#60A5FA] to-[#38BDF8]"; // Soft blues
+    }
+  };
 
   return (
     <section
       id="register"
       className="relative z-10 bg-gray-950 py-12 px-4 sm:px-6 md:px-12 lg:px-24"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto flex flex-col items-center justify-center text-center min-h-[300px]">
         <div className="rounded-2xl bg-gray-900/70 border border-[rgba(0,195,255,0.1)] p-6 sm:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,195,255,0.3)] backdrop-blur-md animate-float-glow">
-          {showContent ? (
+          {status === "open" ? (
             <>
-              {/* Heading */}
-              <h2 className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6">
+              <h2 className={`text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-[length:200%_auto] animate-gradient ${getHeadingClass()} mb-6`}>
                 Ready to Join the CloudSpace Experience?
               </h2>
-
-              {/* Description */}
-              <p className="text-[#D1EAF5]/70 text-base sm:text-lg text-left mb-8">
+              <p className="text-[#D1EAF5]/70 text-base sm:text-lg mb-8">
                 Secure your spot and be a part of our transformative cloud journey.
                 Register now to reserve your seat for all event phases!
               </p>
-
-              {/* Button */}
-              <div className="flex justify-start">
+              <div className="flex justify-center">
                 <Link
                   href="/signup"
                   className="inline-block rounded-full bg-gradient-to-r from-[#00C3FF] to-[#0068FF] px-8 py-3 text-sm sm:text-base font-medium text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
@@ -69,16 +76,23 @@ export default function RegisterNow() {
                 </Link>
               </div>
             </>
-          ) : (
+          ) : status === "countdown" ? (
             <>
-              <p className="text-3xl font-semibold text-center text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-clip-text bg-[length:200%_auto] animate-[gradient_6s_linear_infinite] mb-4">
+              <p className={`text-3xl font-semibold text-transparent bg-clip-text bg-[length:200%_auto] animate-gradient ${getHeadingClass()} mb-4`}>
                 Registrations Opening Soon
               </p>
-
-              {/* Countdown */}
-              <div className="text-center text-[#00C3FF]/80 font-mono text-sm sm:text-base">
+              <div className="text-[#00C3FF]/80 font-mono text-sm sm:text-base">
                 {`${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}
               </div>
+            </>
+          ) : (
+            <>
+              <p className={`text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-[length:200%_auto] animate-gradient ${getHeadingClass()} mb-2`}>
+                Registrations Closed
+              </p>
+              <p className="text-[#D1EAF5]/60 text-base">
+                Thank you for your interest. Stay tuned for future events!
+              </p>
             </>
           )}
         </div>
@@ -100,6 +114,19 @@ export default function RegisterNow() {
 
         .animate-float-glow {
           animation: floatGlowSubtle 4s ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+          0%, 100% {
+            background-position: 0% center;
+          }
+          50% {
+            background-position: 100% center;
+          }
+        }
+
+        .animate-gradient {
+          animation: gradient 6s ease-in-out infinite;
         }
       `}</style>
     </section>
