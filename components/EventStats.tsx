@@ -9,7 +9,6 @@ import Head from "next/head";
 export default function EventStats() {
   const { ref: ref1, inView: inView1 } = useInView({ triggerOnce: true });
   const { ref: ref2, inView: inView2 } = useInView({ triggerOnce: true });
-  const { ref: ref3, inView: inView3 } = useInView({ triggerOnce: true });
 
   const [showFirstImage, setShowFirstImage] = useState(false);
   const [showSecondImage, setShowSecondImage] = useState(false);
@@ -32,34 +31,27 @@ export default function EventStats() {
     }
   }, [inView2]);
 
-  // SEO Metadata
   const title = "Event Stats - CloudSpace v1.0 by IEEE Computer Society SLTC";
   const description =
     "Explore the statistics of CloudSpace v1.0, the premier cloud computing event organized by the IEEE Computer Society Student Branch Chapter of SLTC.";
-  const url = "https://yourdomain.com/event-stats"; // Replace with your actual URL
-  const image = "https://yourdomain.com/images/event-stats-og.png"; // Replace with your social preview image URL
+  const url = "https://yourdomain.com/event-stats";
+  const image = "https://yourdomain.com/images/event-stats-og.png";
 
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-
-        {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content={url} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
-
-        {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -83,11 +75,13 @@ export default function EventStats() {
               visible={showFirstImage}
               src="/images/Session 01.png"
               alt="Phase 01 Participants"
+              delayColor={2000}
             />
             <ImageCard
               visible={showSecondImage}
-              src="/images/Phase 01 All.jpg"
+              src="/images/Session 01_02.png"
               alt="Phase 01 Group Photo"
+              delayColor={2000}
             />
           </div>
 
@@ -106,21 +100,13 @@ export default function EventStats() {
               visible={showThirdImage}
               src="/images/Session02_01.png"
               alt="Phase 02 Participants"
+              delayColor={2000}
             />
             <ImageCard
               visible={showFourthImage}
               src="/images/Session02_02.png"
               alt="Phase 02 Group Photo"
-            />
-          </div>
-
-          {/* ----------- TOTAL PARTICIPANTS ----------- */}
-          <div ref={ref3}>
-            <SectionHeading title="Event Total Participants" />
-            <CountCard
-              inView={inView3}
-              count={238}
-              label="Total Participants in All Phases"
+              delayColor={2000}
             />
           </div>
         </div>
@@ -165,7 +151,11 @@ function CountCard({
         <h3 className="mb-2 text-lg sm:text-xl font-semibold text-[#E0F7FF]">
           {label}
         </h3>
-        <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] group-hover:text-[#0068D1] transition-colors duration-300" aria-live="polite" aria-atomic="true">
+        <p
+          className="text-4xl sm:text-5xl font-bold text-[#00C3FF] group-hover:text-[#0068D1] transition-colors duration-300"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           {inView ? <CountUp end={count} duration={5} /> : 0}
         </p>
       </div>
@@ -177,11 +167,24 @@ function ImageCard({
   visible,
   src,
   alt,
+  delayColor = 0,
 }: {
   visible: boolean;
   src: string;
   alt: string;
+  delayColor?: number;
 }) {
+  const [colorize, setColorize] = useState(false);
+
+  useEffect(() => {
+    if (visible) {
+      const timer = setTimeout(() => {
+        setColorize(true);
+      }, delayColor);
+      return () => clearTimeout(timer);
+    }
+  }, [visible, delayColor]);
+
   return (
     <div
       className={`w-full sm:w-1/2 max-w-[500px] rounded-xl shadow-xl border border-[#00C3FF30] overflow-hidden transition-opacity duration-1000 ${
@@ -195,8 +198,8 @@ function ImageCard({
           alt={alt}
           width={600}
           height={400}
-          className={`object-cover w-full h-auto transition-all duration-1000 ${
-            visible ? "grayscale-0" : "grayscale"
+          className={`object-cover w-full h-auto transition-all duration-[10000ms] filter ${
+            colorize ? "grayscale-0" : "grayscale"
           }`}
           loading="lazy"
           decoding="async"

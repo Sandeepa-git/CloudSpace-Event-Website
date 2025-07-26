@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import CountUp from "react-countup";
 
 type TimeLeft = {
   days: number;
@@ -41,20 +42,17 @@ export default function CountdownTimer() {
     seconds: 0,
   });
   const [eventEnded, setEventEnded] = useState(false);
+  const [animateCount, setAnimateCount] = useState(false);
 
   useEffect(() => {
     function calculateTimeLeft(targetDate: number) {
       const now = Date.now();
       const distance = targetDate - now;
 
-      if (distance <= 0) {
-        return null;
-      }
+      if (distance <= 0) return null;
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -94,12 +92,18 @@ export default function CountdownTimer() {
     return () => clearInterval(interval);
   }, [activePhase]);
 
+  useEffect(() => {
+    // Trigger count animation after a slight delay
+    const t = setTimeout(() => setAnimateCount(true), 1000);
+    return () => clearTimeout(t);
+  }, []);
+
   // SEO metadata
   const title = "Trailblazing Toward Cloud Excellence - Countdown to Next Phases";
   const description =
     "Stay updated with our countdown timer as we prepare for the next stages in cloud excellence. Join us and be part of the future!";
-  const url = "https://yourdomain.com"; // Replace with your actual domain
-  const image = "https://yourdomain.com/og-image.png"; // Replace with your social preview image
+  const url = "https://yourdomain.com";
+  const image = "https://yourdomain.com/og-image.png";
 
   return (
     <>
@@ -121,13 +125,12 @@ export default function CountdownTimer() {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
 
-        {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main
         id="hero"
-        className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden min-h-[400px]"
+        className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden min-h-[500px]"
       >
         {/* Background Video */}
         <video
@@ -145,7 +148,7 @@ export default function CountdownTimer() {
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/40 -z-10" />
 
-        {/* Content */}
+        {/* Countdown Content */}
         <section
           aria-labelledby="countdown-title"
           className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12 relative z-10"
@@ -158,10 +161,9 @@ export default function CountdownTimer() {
               Trailblazing Toward Cloud Excellence
             </h1>
 
-            {/* Show countdown only if event not ended */}
             {!eventEnded && (
               <div
-                className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar"
+                className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar mb-12"
                 role="list"
                 aria-label="Countdown timer"
               >
@@ -171,6 +173,20 @@ export default function CountdownTimer() {
                 <CountdownUnit value={timeLeft.seconds} label="Seconds" />
               </div>
             )}
+
+            {/* Total Participants Section */}
+            <div className="mt-6 sm:mt-10">
+              <h2 className="text-lg sm:text-xl font-medium text-[#AEE8FF] mb-2 tracking-wide uppercase">
+                Total Participants Engaged
+              </h2>
+              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] transition-all duration-1000 ease-in-out drop-shadow-md">
+                {animateCount ? (
+                  <CountUp end={238} duration={4} />
+                ) : (
+                  0
+                )}
+              </p>
+            </div>
           </div>
         </section>
       </main>
