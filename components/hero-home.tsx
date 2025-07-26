@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 type TimeLeft = {
   days: number;
@@ -75,46 +76,85 @@ export default function CountdownTimer() {
     return () => clearInterval(interval);
   }, [activePhase]);
 
+  // Metadata info for SEO
+  const title = "Trailblazing Toward Cloud Excellence - Countdown to Next Phases";
+  const description =
+    "Stay updated with our countdown timer as we prepare for the next stages in cloud excellence. Join us and be part of the future!";
+  const url = "https://yourdomain.com"; // Replace with your actual domain
+  const image = "https://yourdomain.com/og-image.png"; // Replace with your social preview image
+
   return (
-    <section id="hero" className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-label="Animated cloud background"
-        className="absolute top-0 left-0 w-full h-full object-cover -z-20 opacity-80"
-      >
-        <source src="/videos/Animate.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/40 -z-10" />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
 
-      {/* Content */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="py-8 sm:py-12 md:py-20 text-center max-w-4xl mx-auto">
-          <h1
-            className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-4 text-3xl sm:text-4xl md:text-5xl font-semibold"
-          >
-            Trailblazing Toward Cloud Excellence
-          </h1>
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
 
-          <h2 className="text-white font-semibold mb-6 text-2xl sm:text-3xl">
-            {activePhase === 1 ? "Preparing next stage..." : "Preparing next stage..."}
-          </h2>
+        {/* Viewport */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
-          {/* Countdown units in one line with horizontal scroll on small screens */}
-          <div className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar">
-            <CountdownUnit value={timeLeft.days} label="Days" />
-            <CountdownUnit value={timeLeft.hours} label="Hours" />
-            <CountdownUnit value={timeLeft.minutes} label="Minutes" />
-            <CountdownUnit value={timeLeft.seconds} label="Seconds" />
+      <main id="hero" className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-label="Animated cloud background"
+          className="absolute top-0 left-0 w-full h-full object-cover -z-20 opacity-80"
+        >
+          <source src="/videos/Animate.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40 -z-10" />
+
+        {/* Content */}
+        <section
+          aria-labelledby="countdown-title"
+          className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12 relative z-10"
+        >
+          <div className="py-8 sm:py-12 md:py-20 text-center max-w-4xl mx-auto">
+            <h1
+              id="countdown-title"
+              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_left,white,#00C3FF,#0068FF,white)] bg-[length:200%_auto] bg-clip-text text-transparent pb-4 text-3xl sm:text-4xl md:text-5xl font-semibold"
+            >
+              Trailblazing Toward Cloud Excellence
+            </h1>
+
+            <h2 className="text-white font-semibold mb-6 text-2xl sm:text-3xl" aria-live="polite">
+              {activePhase === 1 ? "Preparing next stage..." : "Preparing next stage..."}
+            </h2>
+
+            {/* Countdown units in one line with horizontal scroll on small screens */}
+            <div
+              className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar"
+              role="list"
+              aria-label="Countdown timer"
+            >
+              <CountdownUnit value={timeLeft.days} label="Days" />
+              <CountdownUnit value={timeLeft.hours} label="Hours" />
+              <CountdownUnit value={timeLeft.minutes} label="Minutes" />
+              <CountdownUnit value={timeLeft.seconds} label="Seconds" />
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
       {/* Hide scrollbar styling */}
       <style jsx>{`
@@ -126,6 +166,6 @@ export default function CountdownTimer() {
           scrollbar-width: none;
         }
       `}</style>
-    </section>
+    </>
   );
 }

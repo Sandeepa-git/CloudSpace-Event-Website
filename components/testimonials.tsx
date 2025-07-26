@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
-const launchTime = new Date(2025, 6, 19, 10, 0, 0);
+const launchTime = new Date(2025, 6, 19, 10, 0, 0); // July 19, 2025 10:00 AM
 
 export default function MerchandiseSection() {
   const [isClient, setIsClient] = useState(false);
@@ -45,22 +45,28 @@ export default function MerchandiseSection() {
   if (!isClient) return null;
 
   return (
-    <section id="testimonials" className="bg-black text-white py-16 px-4">
+    <section
+      id="merchandise"
+      aria-label="CloudSpace Merchandise"
+      className="bg-black text-white py-16 px-4"
+    >
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
         {!isLive && timeLeft ? (
           <>
-            <a
-              href="https://forms.gle/SU6sUYjCqR1XzAWv5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text inline-block mb-2"
+            <h2
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-2"
+              tabIndex={0}
             >
               Merchandise Dropping Soon!
-            </a>
+            </h2>
             <p className="text-xl sm:text-2xl font-medium mb-8 text-gray-300">
               Launching in
             </p>
-            <div className="flex gap-4 sm:gap-6 justify-center text-2xl sm:text-3xl font-bold">
+            <div
+              role="timer"
+              aria-live="polite"
+              className="flex gap-4 sm:gap-6 justify-center text-2xl sm:text-3xl font-bold"
+            >
               <div className="flex flex-col items-center">
                 <span>{timeLeft.days}</span>
                 <span className="text-sm sm:text-base">Days</span>
@@ -81,24 +87,22 @@ export default function MerchandiseSection() {
           </>
         ) : (
           <>
-            <a
-              href="https://forms.gle/SU6sUYjCqR1XzAWv5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text inline-block mb-6"
+            <h2
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
+              tabIndex={0}
             >
               Merchandise Available Now!
-            </a>
+            </h2>
 
-            <div className="relative group mb-4 w-full max-w-[320px] mx-auto">
+            <div className="relative group mb-4 w-full max-w-[320px] mx-auto" aria-label="CloudSpace T-shirt">
               {/* Softer glowing ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00C3FF]/30 via-[#0068FF]/20 to-[#00C3FF]/30 blur-2xl animate-pulse scale-[1.15] z-0"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00C3FF]/30 via-[#0068FF]/20 to-[#00C3FF]/30 blur-2xl animate-pulse scale-[1.15] z-0" />
 
               {/* Floating + slow rotating shirt */}
               <div className="relative z-10 rounded-xl overflow-hidden cursor-pointer transform transition-transform duration-700 hover:scale-105 animate-float-rotate-soft">
                 <Image
                   src={TshirtFront}
-                  alt="CloudSpace T-shirt Front"
+                  alt="CloudSpace T-shirt Front View"
                   width={320}
                   height={480}
                   className="object-contain w-full h-auto rounded-xl relative z-20"
@@ -106,7 +110,10 @@ export default function MerchandiseSection() {
                 />
 
                 {/* Subtle shiny gradient overlay */}
-                <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 animate-shiny-gradient-soft mix-blend-screen z-30" />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 animate-shiny-gradient-soft mix-blend-screen z-30"
+                />
               </div>
             </div>
 
@@ -119,7 +126,7 @@ export default function MerchandiseSection() {
               href="https://forms.gle/SU6sUYjCqR1XzAWv5"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full bg-[#0068FF] text-white font-semibold shadow-md hover:bg-[#009FDF] transition duration-300"
+              className="px-6 py-3 rounded-full bg-[#0068FF] text-white font-semibold shadow-md hover:bg-[#009FDF] transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#00C3FF]"
             >
               Order Now
             </a>

@@ -14,7 +14,7 @@ export default function SponsorSlider() {
 
   useEffect(() => {
     const now = new Date();
-    const revealTime = new Date("2025-07-16T19:00:00"); // 7 PM local time on July 15, 2025
+    const revealTime = new Date("2025-07-16T19:00:00");
     setShowSlider(now >= revealTime);
   }, []);
 
@@ -49,13 +49,16 @@ export default function SponsorSlider() {
   if (!showSlider) return null;
 
   return (
-    <section className="w-full bg-[#0B0F19] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#0B0F19] py-12 px-4 sm:px-6 lg:px-8" aria-label="Sponsor slider">
       <div className="max-w-5xl mx-auto text-center">
 
         {/* Gradient Heading */}
         <div className="flex items-center justify-center gap-3 mb-6">
           <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#00C3FF80]" />
-          <h2 className="animate-[gradient_6s_linear_infinite] text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text">
+          <h2
+            className="animate-[gradient_6s_linear_infinite] text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text"
+            tabIndex={0} // optionally focusable for accessibility
+          >
             Our Knowledge Partner
           </h2>
           <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#00C3FF80]" />
@@ -68,13 +71,25 @@ export default function SponsorSlider() {
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
+          role="region"
+          aria-live="polite"
+          aria-roledescription="carousel"
+          tabIndex={0} // allow keyboard focus
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft") {
+              setCurrentIndex((prev) => (prev === 0 ? sponsors.length - 1 : prev - 1));
+            } else if (e.key === "ArrowRight") {
+              setCurrentIndex((prev) => (prev + 1) % sponsors.length);
+            }
+          }}
         >
           {sponsors.map((sponsor, index) => (
             <div
               key={index}
               className={`absolute transition-all duration-700 ease-in-out ${
-                index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
               }`}
+              aria-hidden={index !== currentIndex}
             >
               <img
                 src={sponsor.src}
