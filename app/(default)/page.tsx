@@ -26,14 +26,15 @@ export default function Home() {
       <Preloader />
       <PageIllustration />
       <Hero />
-      <Comments />
+      <EventStats />
+      
       <Features />
       {/* <RegisterNow /> */}
       <Workflows />
       <Testimonials />
       <SponsorSlider/>
       <DigitalPartner />
-      <EventStats />
+      <Comments />
       <Cta />
       <Chatbot />
     </>
