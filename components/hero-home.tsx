@@ -12,7 +12,10 @@ type TimeLeft = {
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center min-w-[60px] sm:min-w-[90px] bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm rounded-md px-3 py-2 sm:px-4 sm:py-3 shadow-md mx-1 sm:mx-2">
+    <div
+      className="flex flex-col items-center min-w-[60px] sm:min-w-[90px] bg-[#00C3FF0D] border border-[#00C3FF30] backdrop-blur-sm rounded-md px-3 py-2 sm:px-4 sm:py-3 shadow-md mx-1 sm:mx-2"
+      role="listitem"
+    >
       <span
         className="text-2xl sm:text-4xl font-extrabold text-[#E0F7FF]"
         style={{ textShadow: "0 0 6px #00C3FF, 0 0 10px #0068FF" }}
@@ -30,13 +33,14 @@ export default function CountdownTimer() {
   const PHASE_1_END = new Date(2025, 6, 19, 10, 0, 0).getTime();
   const PHASE_2_END = new Date(2025, 6, 26, 10, 0, 0).getTime();
 
-  const [activePhase, setActivePhase] = useState<1 | 2>(1);
+  const [activePhase, setActivePhase] = useState<1 | 2 | null>(1);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
+  const [eventEnded, setEventEnded] = useState(false);
 
   useEffect(() => {
     function calculateTimeLeft(targetDate: number) {
@@ -48,7 +52,9 @@ export default function CountdownTimer() {
       }
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -61,13 +67,25 @@ export default function CountdownTimer() {
         if (tl === null) {
           setActivePhase(2);
           const phase2Time = calculateTimeLeft(PHASE_2_END);
-          setTimeLeft(phase2Time ?? { days: 0, hours: 0, minutes: 0, seconds: 0 });
+          if (phase2Time === null) {
+            setEventEnded(true);
+            setActivePhase(null);
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+          } else {
+            setTimeLeft(phase2Time);
+          }
         } else {
           setTimeLeft(tl);
         }
-      } else {
+      } else if (activePhase === 2) {
         const tl = calculateTimeLeft(PHASE_2_END);
-        setTimeLeft(tl ?? { days: 0, hours: 0, minutes: 0, seconds: 0 });
+        if (tl === null) {
+          setEventEnded(true);
+          setActivePhase(null);
+          setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        } else {
+          setTimeLeft(tl);
+        }
       }
     }
 
@@ -76,7 +94,7 @@ export default function CountdownTimer() {
     return () => clearInterval(interval);
   }, [activePhase]);
 
-  // Metadata info for SEO
+  // SEO metadata
   const title = "Trailblazing Toward Cloud Excellence - Countdown to Next Phases";
   const description =
     "Stay updated with our countdown timer as we prepare for the next stages in cloud excellence. Join us and be part of the future!";
@@ -107,7 +125,10 @@ export default function CountdownTimer() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main id="hero" className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden">
+      <main
+        id="hero"
+        className="relative pt-16 sm:pt-20 md:pt-28 overflow-hidden min-h-[400px]"
+      >
         {/* Background Video */}
         <video
           autoPlay
@@ -137,21 +158,19 @@ export default function CountdownTimer() {
               Trailblazing Toward Cloud Excellence
             </h1>
 
-            <h2 className="text-white font-semibold mb-6 text-2xl sm:text-3xl" aria-live="polite">
-              {activePhase === 1 ? "Preparing next stage..." : "Preparing next stage..."}
-            </h2>
-
-            {/* Countdown units in one line with horizontal scroll on small screens */}
-            <div
-              className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar"
-              role="list"
-              aria-label="Countdown timer"
-            >
-              <CountdownUnit value={timeLeft.days} label="Days" />
-              <CountdownUnit value={timeLeft.hours} label="Hours" />
-              <CountdownUnit value={timeLeft.minutes} label="Minutes" />
-              <CountdownUnit value={timeLeft.seconds} label="Seconds" />
-            </div>
+            {/* Show countdown only if event not ended */}
+            {!eventEnded && (
+              <div
+                className="flex flex-nowrap gap-2 sm:gap-6 justify-center overflow-x-auto no-scrollbar"
+                role="list"
+                aria-label="Countdown timer"
+              >
+                <CountdownUnit value={timeLeft.days} label="Days" />
+                <CountdownUnit value={timeLeft.hours} label="Hours" />
+                <CountdownUnit value={timeLeft.minutes} label="Minutes" />
+                <CountdownUnit value={timeLeft.seconds} label="Seconds" />
+              </div>
+            )}
           </div>
         </section>
       </main>
