@@ -93,7 +93,6 @@ export default function CountdownTimer() {
   }, [activePhase]);
 
   useEffect(() => {
-    // Trigger count animation after a slight delay
     const t = setTimeout(() => setAnimateCount(true), 1000);
     return () => clearTimeout(t);
   }, []);
@@ -177,14 +176,10 @@ export default function CountdownTimer() {
             {/* Total Participants Section */}
             <div className="mt-6 sm:mt-10">
               <h2 className="text-lg sm:text-xl font-medium text-[#AEE8FF] mb-2 tracking-wide uppercase">
-                Total Participants Engaged
+                
               </h2>
-              <p className="text-4xl sm:text-5xl font-bold text-[#00C3FF] transition-all duration-1000 ease-in-out drop-shadow-md">
-                {animateCount ? (
-                  <CountUp end={238} duration={4} />
-                ) : (
-                  0
-                )}
+              <p className="text-3xl sm:text-4xl font-bold text-[#00C3FF] transition-all duration-1000 ease-in-out drop-shadow-md">
+                {eventEnded ? "Event Has Ended" : animateCount ? <CountUp end={238} duration={4} /> : 0}
               </p>
             </div>
           </div>

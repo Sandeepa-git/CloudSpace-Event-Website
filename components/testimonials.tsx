@@ -5,10 +5,12 @@ import Image from "next/image";
 
 const TshirtFront = "/images/Shirt.png";
 const launchTime = new Date(2025, 6, 19, 10, 0, 0); // July 19, 2025 10:00 AM
+const closeTime = new Date(2025, 6, 25, 23, 59, 59); // July 25, 2025 11:59 PM
 
 export default function MerchandiseSection() {
   const [isClient, setIsClient] = useState(false);
   const [isLive, setIsLive] = useState(false);
+  const [ordersClosed, setOrdersClosed] = useState(false);
   const [timeLeft, setTimeLeft] = useState<null | {
     days: number;
     hours: number;
@@ -21,14 +23,24 @@ export default function MerchandiseSection() {
 
     const updateTimer = () => {
       const now = new Date();
-      const diff = launchTime.getTime() - now.getTime();
 
-      if (diff <= 0) {
-        setIsLive(true);
+      if (now >= closeTime) {
+        setIsLive(false);
+        setOrdersClosed(true);
         setTimeLeft(null);
         return;
       }
 
+      if (now >= launchTime) {
+        setIsLive(true);
+        setOrdersClosed(false);
+        setTimeLeft(null);
+        return;
+      }
+
+      const diff = launchTime.getTime() - now.getTime();
+      setIsLive(false);
+      setOrdersClosed(false);
       setTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
@@ -51,7 +63,19 @@ export default function MerchandiseSection() {
       className="bg-black text-white py-16 px-4"
     >
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-        {!isLive && timeLeft ? (
+        {ordersClosed ? (
+          <>
+            <h2
+              className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-6"
+              tabIndex={0}
+            >
+              Orders Are Now Closed
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-400">
+              Thanks for your support! Stay tuned for future drops.
+            </p>
+          </>
+        ) : !isLive && timeLeft ? (
           <>
             <h2
               className="animate-[gradient_6s_linear_infinite] text-3xl md:text-4xl font-semibold text-transparent bg-gradient-to-r from-[#00C3FF] via-[#0068FF] to-[#00C3FF] bg-[length:200%_auto] bg-clip-text mb-2"
@@ -94,11 +118,11 @@ export default function MerchandiseSection() {
               Merchandise Available Now!
             </h2>
 
-            <div className="relative group mb-4 w-full max-w-[320px] mx-auto" aria-label="CloudSpace T-shirt">
-              {/* Softer glowing ring */}
+            <div
+              className="relative group mb-4 w-full max-w-[320px] mx-auto"
+              aria-label="CloudSpace T-shirt"
+            >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00C3FF]/30 via-[#0068FF]/20 to-[#00C3FF]/30 blur-2xl animate-pulse scale-[1.15] z-0" />
-
-              {/* Floating + slow rotating shirt */}
               <div className="relative z-10 rounded-xl overflow-hidden cursor-pointer transform transition-transform duration-700 hover:scale-105 animate-float-rotate-soft">
                 <Image
                   src={TshirtFront}
@@ -108,8 +132,6 @@ export default function MerchandiseSection() {
                   className="object-contain w-full h-auto rounded-xl relative z-20"
                   priority
                 />
-
-                {/* Subtle shiny gradient overlay */}
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 animate-shiny-gradient-soft mix-blend-screen z-30"
@@ -117,7 +139,6 @@ export default function MerchandiseSection() {
               </div>
             </div>
 
-            {/* Tagline below the image */}
             <p className="text-white text-lg sm:text-xl font-semibold mb-8 max-w-xl leading-snug">
               Suit up, show up and stand out in CloudSpace flex. Grab yours now!
             </p>
